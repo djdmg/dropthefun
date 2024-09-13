@@ -1,34 +1,33 @@
-name: Deploy WebSite
+name: Deploy Symfony App
 
 on:
   push:
     branches:
-      - master # Déploiement lors d'un push sur la branche main
+      - master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Étape 1 : Checkout du code source depuis un dépôt privé
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
-      # Étape 2 : Déployer sur le serveur via SSH
+      # Étape pour tester la connexion SSH à GitHub
+      - name: Test SSH connection to GitHub
+        run: ssh -T git@github.com
+        env:
+          GIT_SSH_COMMAND: "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no"
+
       - name: Deploy to server
         uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          # passphrase: ${{ secrets.SERVER_PASSPHRASE }} # Décommenter si tu as une passphrase
+          key: ${{ secrets.SERVER_SSH_KEY }}  # Clé privée SSH utilisée pour la connexion
           script: |
-            ls -l
             cd /var/www/clients/client1/web15/web
-            ls -l
             git pull origin master
             /usr/bin/php8.3 /usr/local/bin/composer install --no-interaction --prefer-dist --optimize-autoloader
             /usr/bin/php8.3 /var/www/clients/client1/web15/web/bin/console cache:clear --env=prod
-            /usr/bin/php8.3 /var/www/clients/client1/web15/web/bin/console assets:install public # Si applicable
+            /usr/bin/php8.3 /var/www/clients/client1/web15/web/bin/console assets:install public
