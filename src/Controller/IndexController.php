@@ -30,7 +30,7 @@ class IndexController extends AbstractController
     {
         $allPosts=$apiClient->getOnlineBlogPosts();
 
-        return $this->render('index/indexFR.html.twig', [
+        return $this->render('index/indexFr.html.twig', [
             'articles' => $allPosts,
         ]);
     }
