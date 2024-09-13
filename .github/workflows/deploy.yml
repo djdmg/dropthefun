@@ -13,21 +13,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Étape pour tester la connexion SSH à GitHub
-      - name: Test SSH connection to GitHub
-        run: ssh -T git@github.com
-        env:
-          GIT_SSH_COMMAND: "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no"
-
+      # Connexion SSH à ton serveur pour exécuter les commandes de déploiement
       - name: Deploy to server
         uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}  # Clé privée SSH utilisée pour la connexion
+          key: ${{ secrets.SERVER_SSH_KEY }}  # Clé privée utilisée pour se connecter à ton serveur
           script: |
+            # Test de la connexion SSH depuis ton serveur vers GitHub
+            ssh -T git@github.com || exit 1  # Tester la connexion SSH à GitHub
             cd /var/www/clients/client1/web15/web
-            git pull origin master
+            git pull origin master  # Faire un git pull depuis GitHub
             /usr/bin/php8.3 /usr/local/bin/composer install --no-interaction --prefer-dist --optimize-autoloader
             /usr/bin/php8.3 /var/www/clients/client1/web15/web/bin/console cache:clear --env=prod
             /usr/bin/php8.3 /var/www/clients/client1/web15/web/bin/console assets:install public
