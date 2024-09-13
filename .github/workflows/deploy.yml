@@ -28,7 +28,7 @@ jobs:
             ls -l
             cd /var/www/clients/client1/web15/web
             ls -l
-            git pull origin main
+            git pull origin master
             /usr/bin/php8.3 /usr/local/bin/composer install --no-interaction --prefer-dist --optimize-autoloader
             /usr/bin/php8.3 /var/www/clients/client1/web15/web/bin/console cache:clear --env=prod
             /usr/bin/php8.3 /var/www/clients/client1/web15/web/bin/console assets:install public # Si applicable
