@@ -9,8 +9,14 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class IndexController extends AbstractController
 {
-    #[Route('/', name: 'blog_index')]
-    public function index(BlogPostApiClient $apiClient): Response
+    #[Route('/', name: 'index_principal')]
+    public function index(): Response
+    {
+        return $this->redirectToRoute('blog_index');
+    }
+
+    #[Route('/en/', name: 'blog_index')]
+    public function blog_index(BlogPostApiClient $apiClient): Response
     {
         $allPosts=$apiClient->getOnlineBlogPosts();
         
@@ -39,7 +45,7 @@ class IndexController extends AbstractController
         ]);
     }
 
-    #[Route('/tag/{tag}', name: 'blog_index_tag')]
+    #[Route('/en/tag/{tag}', name: 'blog_index_tag')]
     public function tag(BlogPostApiClient $apiClient,string $tag): Response
     {
 
@@ -53,7 +59,7 @@ class IndexController extends AbstractController
 
 
 
-    #[Route('/article/{WebTitleEN}', name: 'blog_article')]
+    #[Route('en/article/{WebTitleEN}', name: 'blog_article')]
     public function article(BlogPostApiClient $apiClient,string $WebTitleEN): Response
     {
         $article=$apiClient->getPost($WebTitleEN);
@@ -71,6 +77,28 @@ class IndexController extends AbstractController
 
         return $this->render('index/detailFR.html.twig', [
             'article' => $article,
+        ]);
+    }
+
+    #[Route('en/category/{category}', name: 'blog_article_by_category')]
+    public function articleByCategory(BlogPostApiClient $apiClient,string $category): Response
+    {
+        $articles=$apiClient->getPostByCategory($category);
+
+
+        return $this->render('index/index.html.twig', [
+            'articles' => $articles,
+        ]);
+    }
+
+    #[Route('fr/category/{category}', name: 'blog_article_by_category_fr')]
+    public function articleByCategoryFr(BlogPostApiClient $apiClient,string $category): Response
+    {
+        $article=$apiClient->getPostByCategoryFr($category);
+
+
+        return $this->render('index/indexFr.html.twig', [
+            'articles' => $articles,
         ]);
     }
 

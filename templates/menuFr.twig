@@ -1,0 +1,18 @@
+<div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex">
+    <ul class="navigation">
+        <li><a href="{{ path("blog_index_fr") }}">Accueil</a></li>
+        <li><a href="{{ path("blog_article_by_category_fr",{ 'category': 'Actualités'}) }}">Actualités</a></li>
+        <li class="menu-item-has-children"><a>Musique</a>
+            <ul class="sub-menu">
+                <!--    <li><a href="{# {{ path("blog_article_by_category_fr",{ 'category': ''}) }}#}">Album Reviews</a></li> -->
+                <li><a href=" {{ path("blog_article_by_category_fr",{ 'category': 'Critiques de morceaux'}) }}">Critiques de morceaux</a></li>
+                <!--        <li><a href="{# {{ path("blog_article_by_category_fr",{ 'category': ''}) }}#}">Playlists</a></li> -->
+                <!--        <li><a href="{# {{ path("blog_article_by_category_fr",{ 'category': ''}) }}#}">Mixes & Sets</a></li>-->
+            </ul>
+        </li>
+        <!--         <li><a href="{# {{ path("blog_article_by_category_fr",{ 'category': ''}) }}#}">Interviews</a></li>-->
+        <li><a href="{{ path("blog_article_by_category_fr",{ 'category': 'Événements & Festivals'}) }}">Événements & Festivals</a></li>
+        <li><a href="{{ path("blog_article_by_category_fr",{ 'category': 'Équipement & Production'}) }}">Équipement & Production</a></li>
+        <li><a href="{{ path("blog_article_by_category_fr",{ 'category': 'Culture & Histoire'}) }}">Culture & Histoire</a></li>
+    </ul>
+</div>

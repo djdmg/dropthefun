@@ -93,29 +93,8 @@
                                 <!--    <a href="#"><i class="flaticon-menu-bar"></i></a> -->
                             </div>
                             <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex">
-                                <!--  <ul class="navigation">
-                                      <li class="menu-item-has-children"><a href="#">Home</a>
-                                          <ul class="sub-menu">
-                                              <li><a href="index.html">Home Default</a></li>
-                                              <li><a href="index-2.html">Home Interior</a></li>
-                                              <li><a href="index-3.html">Home Travel</a></li>
-                                              <li><a href="index-4.html">Home Technology</a></li>
-                                              <li><a href="index-5.html">Home NFT</a></li>
-                                              <li><a href="index-6.html">Home Fashion</a></li>
-                                              <li><a href="index-7.html">Home Adventure</a></li>
-                                              <li><a href="index-8.html">Home Minimal</a></li>
-                                          </ul>
-                                      </li>
-                                      <li><a href="lifestyle.html">Lifestyle</a></li>
-                                      <li><a href="travel.html">Travel</a></li>
-                                      <li class="active menu-item-has-children"><a href="#">Post Type</a>
-                                          <ul class="sub-menu">
-                                              <li class="active"><a href="blog.html">Our Blog</a></li>
-                                              <li><a href="blog-details.html">Blog Details</a></li>
-                                          </ul>
-                                      </li>
-                                      <li><a href="nft.html">NFT</a></li>
-                                  </ul> -->
+                               <ul class="navigation">
+                                   {% include 'menuFr.twig' %}
                             </div>
                             <div class="tgmenu__action">
                                 <ul class="list-wrap">
@@ -218,21 +197,23 @@
           <div class="container">
               <div class="row">
                   <div class="col-12">
+                      {% if app.request.attributes.get('_route') == 'blog_article_fr' %}
                       <div class="breadcrumb-content">
                           <nav aria-label="breadcrumb">
                               <ol class="breadcrumb">
-                                  <li class="breadcrumb-item"><a href="{{ path("blog_index_fr") }}">Accueil</a></li>
-                                  {% if app.request.attributes.get('_route') == 'blog_article_fr' %}
-                                  <li class="breadcrumb-item" aria-current="page">{{ article.Categorisation.nameFr}}</li>
+
+
+                                      <li class="breadcrumb-item" aria-current="page"><a href="{{ path("blog_article_by_category_fr",{ 'category': article.Categorisation.nameFr}) }}">{{ article.Categorisation.nameFr}}</a> </li>
                                       <li class="breadcrumb-item active" aria-current="page">{{ article.titleFr}}</li>
-                                  {% endif %}
+
                               </ol>
                           </nav>
                       </div>
+                      {% endif %}
                   </div>
               </div>
           </div>
-      </div>-
+      </div>
     <!-- breadcrumb-area-end -->
 
     <!-- blog-details-area -->

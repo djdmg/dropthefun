@@ -160,4 +160,57 @@ class BlogPostApiClient
         // Gérer les erreurs (par exemple, renvoyer null si une erreur survient)
         return new BlogPost();
     }
+
+    public function getPostByCategory(string $category)
+    {
+        // Construire l'URL complète pour accéder à l'endpoint
+        $url = $this->apiBaseUrl . '/category/'.urlencode($category);
+
+        // Effectuer la requête GET avec la clé API dans les headers
+        $response = $this->client->request('GET', $url, [
+            'headers' => [
+                'x-api-key' => $this->apiKey
+            ]
+        ]);
+
+
+
+
+        // Vérifier le statut HTTP de la réponse
+        if ($response->getStatusCode() === 200) {
+
+            // Récupérer et retourner le contenu de la réponse (décodé en tableau associatif)
+            $article=$this->serializer->deserialize($response->getContent(), 'App\Model\BlogPost[]', 'json');
+            return $article;
+        }
+
+        // Gérer les erreurs (par exemple, renvoyer null si une erreur survient)
+        return new BlogPost();
+    }
+
+    public function getPostByCategoryFr(string $category)
+    {
+        // Construire l'URL complète pour accéder à l'endpoint
+        $url = $this->apiBaseUrl . '/fr/category/'.urlencode($category);
+
+        // Effectuer la requête GET avec la clé API dans les headers
+        $response = $this->client->request('GET', $url, [
+            'headers' => [
+                'x-api-key' => $this->apiKey
+            ]
+        ]);
+
+
+
+        // Vérifier le statut HTTP de la réponse
+        if ($response->getStatusCode() === 200) {
+
+            // Récupérer et retourner le contenu de la réponse (décodé en tableau associatif)
+            $article=$this->serializer->deserialize($response->getContent(), 'App\Model\BlogPost[]', 'json');
+            return $article;
+        }
+
+        // Gérer les erreurs (par exemple, renvoyer null si une erreur survient)
+        return new BlogPost();
+    }
 }
