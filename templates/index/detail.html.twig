@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="blog-details-wrap">
+        <ul class="tgbanner__content-meta list-wrap">
+         <!--   <li class="category"><a href="blog.html">technology</a></li>
+            <li><span class="by">By</span> <a href="blog.html">alonso d.</a></li>-->
+            <li>{{ article.createdAt|date("M d, Y") }}</li>
+            <!--     <li>23 comments</li>-->
+           </ul>
+           <h2 class="title">{{ article.TitleEN }}</h2>
+           <div class="blog-details-thumb">
+               <img src="{{asset(article.image) }}" alt="">
+           </div>
+           <div class="blog-details-content">
+
+               {{ article.ContentEN|raw }}
+           </div>
+         <div class="blog-details-bottom">
+               <div class="row align-items-baseline">
+                   <div class="col-xl-6 col-md-7">
+                       <div class="blog-details-tags">
+                           <ul class="list-wrap mb-0">
+                               {% for tag in article.tags %}
+                               <li><a href="{{ path("blog_index_tag",{ 'tag': tag.name_en }) }}">{{tag.name_en}}</a></li>
+                               {% endfor %}
+                           </ul>
+                       </div>
+                   </div>
+                   <div class="col-xl-6 col-md-5">
+                    <!--   <div class="blog-details-share">
+                           <h6 class="share-title">Share Now:</h6>
+                           <ul class="list-wrap mb-0">
+                               <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                               <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                               <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                               <li><a href="#"><i class="fab fa-behance"></i></a></li>
+                               <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                           </ul>
+                       </div> -->
+                   </div>
+               </div>
+           </div>
+        <!--   <div class="blog-avatar-wrap">
+               <div class="blog-avatar-img">
+                   <a href="#"><i class="far fa-check"></i><img src="assets/img/others/avatar.png" alt="img"></a>
+               </div>
+               <div class="blog-avatar-content">
+                   <p>Monty Hython is a Writer at Sarsa and has been covering emerging technologies &amp;
+                       venture capital there since 2013. He covers a wide variety of news from early and late stage startups to massive tech behemoths.</p>
+                   <h5 class="name">Alison Fiano</h5>
+                   <span class="designation">OG Author</span>
+               </div>
+           </div> -->
+           <div class="blog-prev-next-posts">
+               <div class="row">
+                   <div class="col-xl-6 col-lg-8 col-md-6">
+                       <div class="pn-post-item">
+                     <!--      <div class="thumb">
+                               <a href="blog-details.html"><img src="{{ asset('assets/img/lifestyle/life_style06.jpg') }}" alt="img"></a>
+                           </div> -->
+                           <div class="content">
+                               {% if article.PreviousPostId != null %}
+                               <span>Prev Post</span>
+                               <h5 class="title tgcommon__hover"><a href="{{ path("blog_article",{ 'WebTitleEN': article.PreviousPostId }) }}">{{  article.PreviousPostTitle|u.truncate(50) }} ...</a></h5>
+                               {% endif %}
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-xl-6 col-lg-8 col-md-6">
+                       <div class="pn-post-item next-post">
+                           <!--      <div class="thumb">
+                               <div class="thumb">
+                                <a href="blog-details.html"><img src="assets/img/lifestyle/life_style07.jpg" alt="img"></a>
+                            </div>-->
+                            <div class="content">
+                                {% if article.NextPostId != null %}
+                                <span>Next Post</span>
+                                <h5 class="title tgcommon__hover"><a href="{{ path("blog_article",{ 'WebTitleEN': article.NextPostId }) }}">{{  article.NextPostTitle|u.truncate(50) }}...</a></h5>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

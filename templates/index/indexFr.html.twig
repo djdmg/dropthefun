@@ -1,0 +1,37 @@
+{% extends 'baseFr.html.twig' %}
+{% block content %}
+    <div class="col-xl-8 col-lg-7">
+        <div class="blog-post-wrapper">
+            {% for article in articles %}
+                <div class="latest__post-item">
+                    <div class="latest__post-thumb tgImage__hover">
+                        <a href="{{ path("blog_article_fr",{ 'WebTitleFR': article.WebTitleFR }) }}"><img src="{{ article.image }}" alt="img"></a>
+                    </div>
+                    <div class="latest__post-content">
+                        <ul class="tgbanner__content-meta list-wrap">
+                            <!--       <li class="category"><a href="blog.html">technology</a></li>
+                                   <li><span class="by">By</span> <a href="blog.html">alonso d.</a></li> -->
+                            <li>{{ article.createdAt|date("M d, Y") }}</li>
+                        </ul>
+                        <h3 class="title tgcommon__hover"><a href="{{ path("blog_article_fr",{ 'WebTitleFR': article.WebTitleFR }) }}">{{ article.TitleFR }}</a></h3>
+                        <p>{{ article.ContentFR|striptags('<p>')|u.truncate(500)|raw}} ...</p>
+
+
+                        <div class="latest__post-read-more">
+                            <a href="{{ path("blog_article_fr",{ 'WebTitleFR': article.WebTitleFR }) }}">Voir Plus<i class="far fa-long-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <!--      <div class="pagination__wrap">
+                      <ul class="list-wrap">
+                          <li class="active"><a href="#">01</a></li>
+                          <li><a href="#">02</a></li>
+                          <li><a href="#">...</a></li>
+                          <li><a href="#">06</a></li>
+                          <li><a href="#"><i class="fas fa-angle-double-right"></i></a></li>
+                      </ul>
+                  </div> -->
+        </div>
+    </div>
+{% endblock %}
