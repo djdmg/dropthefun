@@ -94,7 +94,7 @@ class IndexController extends AbstractController
     #[Route('fr/category/{category}', name: 'blog_article_by_category_fr')]
     public function articleByCategoryFr(BlogPostApiClient $apiClient,string $category): Response
     {
-        $article=$apiClient->getPostByCategoryFr($category);
+        $articles=$apiClient->getPostByCategoryFr($category);
 
 
         return $this->render('index/indexFr.html.twig', [
