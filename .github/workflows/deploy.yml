@@ -1,4 +1,4 @@
-name: Deploy Symfony 7 site
+name: Deploy WebSite
 
 on:
   push:
@@ -23,6 +23,7 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
+          # passphrase: ${{ secrets.SERVER_PASSPHRASE }} # Décommenter si tu as une passphrase
           script: |
             cd web
             git pull origin main
