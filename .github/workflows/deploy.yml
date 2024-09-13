@@ -25,7 +25,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           # passphrase: ${{ secrets.SERVER_PASSPHRASE }} # Décommenter si tu as une passphrase
           script: |
-            cd web
+            cd web/
             git pull origin main
             /usr/bin/php8.3 /usr/local/bin/composer install --no-interaction --prefer-dist --optimize-autoloader
             /usr/bin/php8.3 web/bin/console cache:clear --env=prod
