@@ -3,7 +3,7 @@ name: Deploy WebSite
 on:
   push:
     branches:
-      - main # Déploiement lors d'un push sur la branche main
+      - master # Déploiement lors d'un push sur la branche main
 
 jobs:
   deploy:
