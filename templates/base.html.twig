@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>DropTheFun - EDM News With Fun Touch</title>
+    <title>DropTheFun - Actualités EDM avec une touche de fun</title>
     <meta name="description" content="DropTheFun - EDM News With Fun Touche">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -61,11 +61,19 @@
                                         ENG
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        {% if app.request.attributes.get('_route') == 'blog_article' %}
-                                            <li><a class="dropdown-item" href="{{ path("blog_article_fr",{ 'WebTitleFR': article.WebTitleFR }) }}">FR</a></li>
-                                        {% else %}
-                                            <li><a class="dropdown-item" href="{{ path("blog_index_fr") }}">FR</a></li>
+
+                                        {% set route = app.request.attributes.get('_route') %}
+
+                                        {% if route == 'blog_article' %}
+                                            <li><a class="dropdown-item" href="{{ path('blog_article_fr', { 'WebTitleFR': article.WebTitleFR }) }}">FR</a></li>
+                                        {% elseif route == 'blog_index' %}
+                                            <li><a class="dropdown-item" href="{{ path('blog_index_fr') }}">FR</a></li>
+                                        {% elseif route == 'blog_index_tag' %}
+                                            <li><a class="dropdown-item" href="{{ path("blog_index_tag_fr",{ 'tag': tag }) }}">FR</a></li>
+                                        {% elseif route == 'blog_article_by_category' %}
+                                            <li><a class="dropdown-item" href="{{ path("blog_article_by_category_fr",{ 'category': category.slugFr}) }}">FR</a></li>
                                         {% endif %}
+
 
 
 

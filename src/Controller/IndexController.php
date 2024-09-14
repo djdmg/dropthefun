@@ -42,7 +42,7 @@ class IndexController extends AbstractController
         $allPosts=$apiClient->getOnlineBlogPostsByTagFr($tag);
 
         return $this->render('index/indexFR.html.twig', [
-            'articles' => $allPosts,
+            'articles' => $allPosts,'tag' => $tag
         ]);
     }
 
@@ -54,7 +54,7 @@ class IndexController extends AbstractController
         $allPosts=$apiClient->getOnlineBlogPostsByTag($tag);
 
         return $this->render('index/index.html.twig', [
-            'articles' => $allPosts,
+            'articles' => $allPosts, 'tag' => $tag
         ]);
     }
 
@@ -88,7 +88,7 @@ class IndexController extends AbstractController
 
 
         return $this->render('index/index.html.twig', [
-            'articles' => $articles,
+            'articles' => $articles, 'category' => $articles[0]->getCategorisation()
         ]);
     }
 
@@ -99,7 +99,7 @@ class IndexController extends AbstractController
 
 
         return $this->render('index/indexFR.html.twig', [
-            'articles' => $articles,
+            'articles' => $articles, 'category' => $articles[0]->getCategorisation()
         ]);
     }
 
