@@ -19,7 +19,8 @@ class IndexController extends AbstractController
     public function blog_index(BlogPostApiClient $apiClient): Response
     {
         $allPosts=$apiClient->getOnlineBlogPosts();
-        
+
+
         return $this->render('index/index.html.twig', [
             'articles' => $allPosts,
         ]);

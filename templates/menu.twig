@@ -1,18 +1,40 @@
 <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex">
     <ul class="navigation">
-        <li><a href="{{ path("blog_index") }}">Home</a></li>
-        <li><a href="{{ path("blog_article_by_category",{ 'category': 'News'}) }}">News</a></li>
-        <li class="menu-item-has-children"><a>Music</a>
+        <li><a href="{{ path('blog_index') }}">Home</a></li>
+        <li class="menu-item-has-children"><a>News</a>
             <ul class="sub-menu">
-            <!--    <li><a href="{# {{ path("blog_article_by_category",{ 'category': ''}) }}#}">Album Reviews</a></li> -->
-                <li><a href=" {{ path("blog_article_by_category",{ 'category': 'Track Reviews'}) }}">Track Reviews</a></li>
-        <!--        <li><a href="{# {{ path("blog_article_by_category",{ 'category': ''}) }}#}">Playlists</a></li> -->
-                <!--        <li><a href="{# {{ path("blog_article_by_category",{ 'category': ''}) }}#}">Mixes & Sets</a></li>-->
+                <li><a href="{{ path('blog_article_by_category', { 'category': 'edm-news' }) }}">EDM News</a></li>
+                <li><a href="{{ path('blog_article_by_category', { 'category': 'new-releases' }) }}">New Releases</a></li>
+                <li><a href="{{ path('blog_article_by_category', { 'category': 'Top Charts' }) }}">Top Charts</a></li>
             </ul>
         </li>
-        <!--         <li><a href="{# {{ path("blog_article_by_category",{ 'category': ''}) }}#}">Interviews</a></li>-->
-        <li><a href="{{ path("blog_article_by_category",{ 'category': 'Events & Festivals'}) }}">Events & Festivals</a></li>
-        <li><a href="{{ path("blog_article_by_category",{ 'category': 'Events & Festivals'}) }}">Equipment & Production</a></li>
-{#       <li><a href="{{ path("blog_article_by_category",{ 'category': 'Culture & History'}) }}">Culture & History</a></li> #}
+        <li class="menu-item-has-children"><a>Music</a>
+            <ul class="sub-menu">
+                <li><a href="{{ path('blog_article_by_category', { 'category': 'Reviews' }) }}">Reviews</a></li>
+                <li><a href="{{ path('blog_article_by_category', { 'category': 'Playlists and Mixes' }) }}">Playlists and Mixes</a></li>
+                <li><a href="{{ path('blog_article_by_category', { 'category': 'collaborations-and-remixes' }) }}">Collaborations and Remixes</a></li>
+                <li><a href="{{ path('blog_article_by_category', { 'category': 'Music Videos and Clips' }) }}">Music Videos and Clips</a></li>
+                <li><a href="{{ path('blog_article_by_category', { 'category': 'edm-genres' }) }}">EDM Genres</a></li>
+            </ul>
+        </li>
+        <li class="menu-item-has-children"><a>Artists & Events</a>
+            <ul class="sub-menu">
+                <li><a href="{{ path('blog_article_by_category', { 'category': 'Emerging Artists' }) }}">Emerging Artists</a></li>
+                <li><a href="{{ path('blog_article_by_category', { 'category': 'Interviews' }) }}">Interviews</a></li>
+                <li><a href="{{ path('blog_article_by_category', { 'category': 'events-and-festivals' }) }}">Events and Festivals</a></li>
+                <li><a href="{{ path('blog_article_by_category', { 'category': 'Community Events' }) }}">Community Events</a></li>
+            </ul>
+        </li>
+        <li class="menu-item-has-children"><a>Culture & Learning</a>
+            <ul class="sub-menu">
+                <li><a href="{{ path('blog_article_by_category', { 'category': 'culture-and-lifestyle' }) }}">Culture and Lifestyle</a></li>
+                <li><a href="{{ path('blog_article_by_category', { 'category': 'Tips for Fans' }) }}">Tips for Fans</a></li>
+                <li><a href="{{ path('blog_article_by_category', { 'category': 'Opinions and Editorials' }) }}">Opinions and Editorials</a></li>
+                <li><a href="{{ path('blog_article_by_category', { 'category': 'tutorials-and-production' }) }}">Tutorials and Production</a></li>
+                <li><a href="{{ path('blog_article_by_category', { 'category': 'technology-and-equipment' }) }}">Technology and Equipment</a></li>
+                <li><a href="{{ path('blog_article_by_category', { 'category': 'Podcasts and Radio Shows' }) }}">Podcasts and Radio Shows</a></li>
+            </ul>
+        </li>
+
     </ul>
 </div>

@@ -39,6 +39,8 @@ class BlogPostApiClient
 
 
 
+
+
         // Vérifier le statut HTTP de la réponse
         if ($response->getStatusCode() === 200) {
             // Récupérer et retourner le contenu de la réponse (décodé en tableau associatif)

@@ -3,7 +3,7 @@
 {% block content %}
     <div class="blog-details-wrap">
         <ul class="tgbanner__content-meta list-wrap">
-             <li class="category"><a href="blog.html">{{ article.Categorisation.nameFr}}</a></li>
+             <li class="category"><a href="{{ path("blog_article_by_category_fr",{ 'category': article.Categorisation.slugFr}) }}">{{ article.Categorisation.nameFr}}</a></li>
             <!--       <li><span class="by">By</span> <a href="blog.html">alonso d.</a></li>-->
             <li>{{ article.createdAt|date("M d, Y") }}</li>
             <!--     <li>23 comments</li>-->
@@ -22,7 +22,8 @@
                      <div class="blog-details-tags">
                          <ul class="list-wrap mb-0">
                              {% for tag in article.tags %}
-                                 <li><a href="{{ path("blog_index_tag_fr",{ 'tag': tag.name_fr }) }}">{{tag.name_fr}}</a></li>
+
+                                <li><a href="{{ path("blog_index_tag_fr",{ 'tag': tag.slugFr }) }}">{{tag.name_fr}} </a></li>
                              {% endfor %}
                          </ul>
                      </div>

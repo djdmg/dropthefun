@@ -1,18 +1,40 @@
 <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex">
     <ul class="navigation">
-        <li><a href="{{ path("blog_index_fr") }}">Accueil</a></li>
-        <li><a href="{{ path("blog_article_by_category_fr",{ 'category': 'Actualités'}) }}">Actualités</a></li>
-        <li class="menu-item-has-children"><a>Musique</a>
+        <li><a href="{{ path('blog_index') }}">Accueil</a></li>
+        <li class="menu-item-has-children"><a>Actualités</a>
             <ul class="sub-menu">
-                <!--    <li><a href="{# {{ path("blog_article_by_category_fr",{ 'category': ''}) }}#}">Album Reviews</a></li> -->
-                <li><a href=" {{ path("blog_article_by_category_fr",{ 'category': 'Critiques de morceaux'}) }}">Critiques de morceaux</a></li>
-                <!--        <li><a href="{# {{ path("blog_article_by_category_fr",{ 'category': ''}) }}#}">Playlists</a></li> -->
-                <!--        <li><a href="{# {{ path("blog_article_by_category_fr",{ 'category': ''}) }}#}">Mixes & Sets</a></li>-->
+                <li><a href="{{ path('blog_article_by_category_fr', { 'category': 'actu-edm' }) }}">Actualités EDM</a></li>
+                <li><a href="{{ path('blog_article_by_category_fr', { 'category': 'nouvelles-sorties' }) }}">Nouvelles Sorties</a></li>
+                <li><a href="{{ path('blog_article_by_category_fr', { 'category': 'Top Charts' }) }}">Top Charts</a></li>
             </ul>
         </li>
-        <!--         <li><a href="{# {{ path("blog_article_by_category_fr",{ 'category': ''}) }}#}">Interviews</a></li>-->
-        <li><a href="{{ path("blog_article_by_category_fr",{ 'category': 'Événements & Festivals'}) }}">Événements & Festivals</a></li>
-        <li><a href="{{ path("blog_article_by_category_fr",{ 'category': 'Équipement & Production'}) }}">Équipement & Production</a></li>
-        <li><a href="{{ path("blog_article_by_category_fr",{ 'category': 'Culture & Histoire'}) }}">Culture & Histoire</a></li>
+        <li class="menu-item-has-children"><a>Musique</a>
+            <ul class="sub-menu">
+                <li><a href="{{ path('blog_article_by_category_fr', { 'category': 'Critiques' }) }}">Critiques</a></li>
+                <li><a href="{{ path('blog_article_by_category_fr', { 'category': 'Playlists et Mixes' }) }}">Playlists et Mixes</a></li>
+                <li><a href="{{ path('blog_article_by_category_fr', { 'category': 'collaborations-et-remixes' }) }}">Collaborations et Remixes</a></li>
+                <li><a href="{{ path('blog_article_by_category_fr', { 'category': 'Clips et Vidéos' }) }}">Clips et Vidéos</a></li>
+                <li><a href="{{ path('blog_article_by_category_fr', { 'category': 'genres-edm' }) }}">Genres EDM</a></li>
+            </ul>
+        </li>
+        <li class="menu-item-has-children"><a>Artistes & Événements</a>
+            <ul class="sub-menu">
+                <li><a href="{{ path('blog_article_by_category_fr', { 'category': 'Artistes Émergents' }) }}">Artistes Émergents</a></li>
+                <li><a href="{{ path('blog_article_by_category_fr', { 'category': 'Interviews' }) }}">Interviews</a></li>
+                <li><a href="{{ path('blog_article_by_category_fr', { 'category': 'evenements-et-festivals' }) }}">Événements et Festivals</a></li>
+                <li><a href="{{ path('blog_article_by_category_fr', { 'category': 'Événements Communautaires' }) }}">Événements Communautaires</a></li>
+            </ul>
+        </li>
+        <li class="menu-item-has-children"><a>Culture & Apprentissage</a>
+            <ul class="sub-menu">
+                <li><a href="{{ path('blog_article_by_category_fr', { 'category': 'culture-et-lifestyle' }) }}">Culture et Lifestyle</a></li>
+                <li><a href="{{ path('blog_article_by_category_fr', { 'category': 'Conseils pour les Fans' }) }}">Conseils pour les Fans</a></li>
+                <li><a href="{{ path('blog_article_by_category_fr', { 'category': 'Opinions et Éditoriaux' }) }}">Opinions et Éditoriaux</a></li>
+                <li><a href="{{ path('blog_article_by_category_fr', { 'category': 'tutoriels-et-production' }) }}">Tutoriels et Production</a></li>
+                <li><a href="{{ path('blog_article_by_category_fr', { 'category': 'technologie-et-equipement' }) }}">Technologie et Équipement</a></li>
+                <li><a href="{{ path('blog_article_by_category_fr', { 'category': 'Podcasts et Radios' }) }}">Podcasts et Radios</a></li>
+            </ul>
+        </li>
+
     </ul>
 </div>

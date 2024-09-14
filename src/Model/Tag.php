@@ -13,6 +13,9 @@ class Tag
 
     private ?string $name_fr = null;
 
+    private ?string $slug_fr = null;
+
+    private ?string $slug_en = null;
 
     public function getId(): ?int
     {
@@ -42,6 +45,26 @@ class Tag
     public function setNameFr(?string $name_fr): void
     {
         $this->name_fr = $name_fr;
+    }
+
+    public function getSlugFr(): ?string
+    {
+        return $this->slug_fr;
+    }
+
+    public function setSlugFr(?string $slug_fr): void
+    {
+        $this->slug_fr = $slug_fr;
+    }
+
+    public function getSlugEn(): ?string
+    {
+        return $this->slug_en;
+    }
+
+    public function setSlugEn(?string $slug_en): void
+    {
+        $this->slug_en = $slug_en;
     }
 
 
