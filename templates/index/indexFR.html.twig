@@ -27,37 +27,7 @@
 
 
 
-
-            {# Pagination Controls #}
-                <div class="pagination__wrap">
-                    <ul class="list-wrap">
-                        {# Bouton "Previous" #}
-                        {% if pagination.has_previous_page %}
-                            <li><a href="{{ path('blog_indexfr2', { 'page': pagination.previous_page }) }}"><i class="fas fa-angle-double-left"></i></a></li>
-                        {% else %}
-                            <li class="disabled"><a href="#"><i class="fas fa-angle-double-left"></i></a></li>
-                        {% endif %}
-
-                        {# Pages avec points de suspension si nécessaire #}
-                        {% for page in 1..pagination.total_pages %}
-                            {% if page == pagination.current_page %}
-                                <li class="active"><a href="#">{{ page|number_format(0) }}</a></li>
-                            {% elseif page <= 2 or page > pagination.total_pages - 2 or (page >= pagination.current_page - 1 and page <= pagination.current_page + 1) %}
-                                <li><a href="{{ path('blog_indexfr2', { 'page': page }) }}">{{ page|number_format(0) }}</a></li>
-                            {% elseif page == 3 or page == pagination.total_pages - 2 %}
-                                <li><a href="#">...</a></li>
-                            {% endif %}
-                        {% endfor %}
-
-                        {# Bouton "Next" #}
-                        {% if pagination.has_next_page %}
-                            <li><a href="{{ path('blog_indexfr2', { 'page': pagination.next_page }) }}"><i class="fas fa-angle-double-right"></i></a></li>
-                        {% else %}
-                            <li class="disabled"><a href="#"><i class="fas fa-angle-double-right"></i></a></li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
+            {% include 'index/paginationFR.html.twig' %}
         </div>
     </div>
 {% endblock %}
