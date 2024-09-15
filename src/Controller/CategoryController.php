@@ -12,7 +12,7 @@ class CategoryController extends AbstractController
     #[Route('en/category/{category}', name: 'blog_article_by_category')]
     public function articleByCategory(BlogPostApiClient $apiClient,string $category): Response
     {
-        $articles=$apiClient->getPostByCategory($category,1,1);
+        $articles=$apiClient->getPostByCategory($category,1,5);
         $articles2=$articles->getData();
 
 
