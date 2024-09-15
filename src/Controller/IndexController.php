@@ -15,92 +15,56 @@ class IndexController extends AbstractController
         return $this->redirectToRoute('blog_index');
     }
 
+    #[Route('/fr/articles/{page}', name: 'blog_indexfr2')]
+    public function blog_index2(BlogPostApiClient $apiClient,int $page): Response
+    {
+        $allPosts=$apiClient->getOnlineBlogPosts($page,5);
+
+        ;
+        return $this->render('index/indexFR.html.twig', [
+            'articles' => $allPosts->getData(), 'pagination' => $allPosts->getPagination()
+        ]);
+    }
+
+
+    #[Route('/en/articles/{page}', name: 'blog_index2')]
+    public function blog_index2fr(BlogPostApiClient $apiClient,int $page): Response
+    {
+        $allPosts=$apiClient->getOnlineBlogPosts($page,5);
+
+      ;
+        return $this->render('index/index.html.twig', [
+            'articles' => $allPosts->getData(), 'pagination' => $allPosts->getPagination()
+        ]);
+    }
+
     #[Route('/en/', name: 'blog_index')]
     public function blog_index(BlogPostApiClient $apiClient): Response
     {
-        $allPosts=$apiClient->getOnlineBlogPosts();
+        $allPosts=$apiClient->getOnlineBlogPosts(1,5);
 
 
         return $this->render('index/index.html.twig', [
-            'articles' => $allPosts,
+            'articles' => $allPosts->getData(), 'pagination' => $allPosts->getPagination()
         ]);
     }
 
     #[Route('/fr/', name: 'blog_index_fr')]
     public function indexfr(BlogPostApiClient $apiClient): Response
     {
-        $allPosts=$apiClient->getOnlineBlogPosts();
+        $allPosts=$apiClient->getOnlineBlogPosts(1,5);
 
         return $this->render('index/indexFR.html.twig', [
-            'articles' => $allPosts,
-        ]);
-    }
-
-    #[Route('/fr/tag/{tag}', name: 'blog_index_tag_fr')]
-    public function tagfr(BlogPostApiClient $apiClient,string $tag): Response
-    {
-        $allPosts=$apiClient->getOnlineBlogPostsByTagFr($tag);
-
-        return $this->render('index/indexFR.html.twig', [
-            'articles' => $allPosts,'tag' => $tag
-        ]);
-    }
-
-    #[Route('/en/tag/{tag}', name: 'blog_index_tag')]
-    public function tag(BlogPostApiClient $apiClient,string $tag): Response
-    {
-
-
-        $allPosts=$apiClient->getOnlineBlogPostsByTag($tag);
-
-        return $this->render('index/index.html.twig', [
-            'articles' => $allPosts, 'tag' => $tag
+            'articles' => $allPosts->getData(),'pagination' => $allPosts->getPagination(),
         ]);
     }
 
 
 
-    #[Route('en/article/{WebTitleEN}', name: 'blog_article')]
-    public function article(BlogPostApiClient $apiClient,string $WebTitleEN): Response
-    {
-        $article=$apiClient->getPost($WebTitleEN);
 
 
-        return $this->render('index/detail.html.twig', [
-            'article' => $article,
-        ]);
-    }
-
-    #[Route('/fr/article/{WebTitleFR}', name: 'blog_article_fr')]
-    public function articleFR(BlogPostApiClient $apiClient,string $WebTitleFR): Response
-    {
-        $article=$apiClient->getPostFR($WebTitleFR);
-
-        return $this->render('index/detailFR.html.twig', [
-            'article' => $article,
-        ]);
-    }
-
-    #[Route('en/category/{category}', name: 'blog_article_by_category')]
-    public function articleByCategory(BlogPostApiClient $apiClient,string $category): Response
-    {
-        $articles=$apiClient->getPostByCategory($category);
 
 
-        return $this->render('index/index.html.twig', [
-            'articles' => $articles, 'category' => $articles[0]->getCategorisation()
-        ]);
-    }
 
-    #[Route('fr/category/{category}', name: 'blog_article_by_category_fr')]
-    public function articleByCategoryFr(BlogPostApiClient $apiClient,string $category): Response
-    {
-        $articles=$apiClient->getPostByCategoryFr($category);
-
-
-        return $this->render('index/indexFR.html.twig', [
-            'articles' => $articles, 'category' => $articles[0]->getCategorisation()
-        ]);
-    }
 
 }

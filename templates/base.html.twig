@@ -68,6 +68,8 @@
                                             <li><a class="dropdown-item" href="{{ path('blog_article_fr', { 'WebTitleFR': article.WebTitleFR }) }}">FR</a></li>
                                         {% elseif route == 'blog_index' %}
                                             <li><a class="dropdown-item" href="{{ path('blog_index_fr') }}">FR</a></li>
+                                        {% elseif route == 'blog_index2' %}
+                                            <li><a class="dropdown-item" href="{{ path('blog_indexfr2' ,  { 'page': pagination.current_page}) }}">FR</a></li>
                                         {% elseif route == 'blog_index_tag' %}
                                             <li><a class="dropdown-item" href="{{ path("blog_index_tag_fr",{ 'tag': tag }) }}">FR</a></li>
                                         {% elseif route == 'blog_article_by_category' %}
@@ -219,7 +221,7 @@
               </div>
           </div>
       </div>
-      <!-- breadcrumb-area-end
+      <!-- breadcrumb-area-end  -->
 
     <!-- blog-details-area -->
     <section class="blog-details-area pt-80 pb-100">

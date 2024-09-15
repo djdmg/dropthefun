@@ -1,0 +1,84 @@
+{# Pagination Controls #}
+<div class="pagination__wrap">
+    {% if pagination.has_previous_page %}
+        <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'page': pagination.previous_page})) }}"></a>
+    {% endif %}
+
+    {% for page in 1..pagination.total_pages %}
+        {% if page == pagination.current_page %}
+
+        {% else %}
+            <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'page': page})) }}"></a>
+        {% endif %}
+    {% endfor %}
+
+    {% if pagination.has_next_page %}
+        <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'page': pagination.next_page})) }}"></a>
+    {% endif %}
+</div>
+{# Pagination Controls #}
+<div class="pagination__wrap">
+    <ul class="list-wrap">
+        {# Bouton "Previous" #}
+        {% if pagination.has_previous_page %}
+            {% if route == 'blog_index' %}
+                <li><a href="{{ path('blog_index2', { 'page': pagination.previous_page }) }}"><i class="fas fa-angle-double-left"></i></a></li>
+            {% elseif route == 'blog_index2' %}
+                <li><a href="{{ path('blog_index2', { 'page': pagination.previous_page }) }}"><i class="fas fa-angle-double-left"></i></a></li>
+            {% elseif route == 'blog_article_by_category' %}
+                <li><a href="{{ path('blog_article_by_category2', { 'page': pagination.previous_page, 'category':category.slugEn  }) }}"><i class="fas fa-angle-double-left"></i></a></li>
+            {% elseif route == 'blog_article_by_category2' %}
+                <li><a href="{{ path('blog_article_by_category2', { 'page': pagination.previous_page, 'category':category.slugEn  }) }}"><i class="fas fa-angle-double-left"></i></a></li>
+            {% elseif route == 'blog_index_tag' %}
+                <li><a href="{{ path('blog_index_tag2', { 'page': pagination.previous_page, 'category':tag.slugEn  }) }}"><i class="fas fa-angle-double-left"></i></a></li>
+            {% elseif route == 'blog_index_tag2' %}
+                <li><a href="{{ path('blog_index_tag2', { 'page': pagination.previous_page, 'category':tag.slugEn  }) }}"><i class="fas fa-angle-double-left"></i></a></li>
+            {% endif %}
+        {% else %}
+            <li class="disabled"><a href="#"><i class="fas fa-angle-double-left"></i></a></li>
+        {% endif %}
+
+        {# Pages avec points de suspension si nécessaire #}
+        {% for page in 1..pagination.total_pages %}
+            {% if page == pagination.current_page %}
+                <li class="active"><a href="#">{{ page|number_format(0) }}</a></li>
+            {% elseif page <= 2 or page > pagination.total_pages - 2 or (page >= pagination.current_page - 1 and page <= pagination.current_page + 1) %}
+                {% if route == 'blog_index' %}
+                    <li><a href="{{ path('blog_index2', { 'page': page }) }}">{{ page|number_format(0) }}</a></li>
+                {% elseif route == 'blog_index2' %}
+                    <li><a href="{{ path('blog_index2', { 'page': page }) }}">{{ page|number_format(0) }}</a></li>
+                {% elseif route == 'blog_article_by_category' %}
+                    <li><a href="{{ path('blog_article_by_category2', { 'page': page, 'category':category.slugEn }) }}">{{ page|number_format(0) }}</a></li>
+                {% elseif route == 'blog_article_by_category2' %}
+                    <li><a href="{{ path('blog_article_by_category2', { 'page': page, 'category':category.slugEn  }) }}">{{ page|number_format(0) }}</a></li>
+                {% elseif route == 'blog_index_tag' %}
+                    <li><a href="{{ path('blog_index_tag2', { 'page': page, 'tag':tag.slugEn }) }}">{{ page|number_format(0) }}</a></li>
+                {% elseif route == 'blog_index_tag2' %}
+                    <li><a href="{{ path('blog_index_tag2', { 'page': page, 'tag':tag.slugEn  }) }}">{{ page|number_format(0) }}</a></li>
+                {% endif %}
+
+            {% elseif page == 3 or page == pagination.total_pages - 2 %}
+                <li><a href="#">...</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {# Bouton "Next" #}
+        {% if pagination.has_next_page %}
+              {% if route == 'blog_index' %}
+                 <li><a href="{{ path('blog_index2', { 'page': pagination.next_page }) }}"><i class="fas fa-angle-double-right"></i></a></li>
+              {% elseif route == 'blog_index2' %}
+                  <li><a href="{{ path('blog_index2', { 'page': pagination.next_page }) }}"><i class="fas fa-angle-double-right"></i></a></li>
+              {% elseif route == 'blog_article_by_category2' %}
+                  <li><a href="{{ path('blog_article_by_category2', { 'page': pagination.next_page, 'category':category.slugEn }) }}"><i class="fas fa-angle-double-right"></i></a></li>
+              {% elseif route == 'blog_article_by_category' %}
+                  <li><a href="{{ path('blog_article_by_category2', { 'page': pagination.next_page, 'category':category.slugEn }) }}"><i class="fas fa-angle-double-right"></i></a></li>
+              {% elseif route == 'blog_index_tag' %}
+                  <li><a href="{{ path('blog_index_tag2', { 'page': pagination.next_page, 'tag':category.slugEn }) }}"><i class="fas fa-angle-double-right"></i></a></li>
+              {% elseif route == 'blog_index_tag2' %}
+                  <li><a href="{{ path('blog_index_tag2', { 'page': pagination.next_page, 'tag':category.slugEn }) }}"><i class="fas fa-angle-double-right"></i></a></li>
+              {% endif %}
+        {% else %}
+            <li class="disabled"><a href="#"><i class="fas fa-angle-double-right"></i></a></li>
+        {% endif %}
+    </ul>
+</div>

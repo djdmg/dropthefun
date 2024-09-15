@@ -70,6 +70,8 @@
                                             <li><a class="dropdown-item" href="{{ path('blog_article', { 'WebTitleEN': article.WebTitleEN }) }}">ENG</a></li>
                                         {% elseif route == 'blog_index_fr' %}
                                             <li><a class="dropdown-item" href="{{ path('blog_index') }}">ENG</a></li>
+                                        {% elseif route == 'blog_indexfr2' %}
+                                            <li><a class="dropdown-item" href="{{ path('blog_index2',  { 'page': pagination.current_page}) }}">ENG</a></li>
                                         {% elseif route == 'blog_index_tag_fr' and tag is defined %}
                                             <li><a class="dropdown-item" href="{{ path('blog_index_tag', { 'tag': tag }) }}">ENG</a></li>
                                         {% elseif route == 'blog_article_by_category_fr' and category is defined %}
