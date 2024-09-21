@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <!-- Début de l'article avec microdonnées NewsArticle -->
+    <article itemscope itemtype="http://schema.org/NewsArticle" class="blog-details-wrap">
+        <ul class="tgbanner__content-meta list-wrap">
+            <li class="category">
+                <a href="{{ path('blog_article_by_category', { 'category': article.Categorisation.slugEn }) }}">
+                    {{ article.Categorisation.nameEn }}
+                </a>
+            </li>
+            <!--
+            <li><span class="by">By</span> <a href="blog.html">alonso d.</a></li>
+            -->
+            <li>
+                <time itemprop="datePublished" datetime="{{ article.createdAt|date('Y-m-d') }}">
+                    {{ article.createdAt|date('M d, Y') }}
+                </time>
+            </li>
+            <!--
+            <li>
+                <span itemprop="commentCount">23 comments</span>
+            </li>
+            -->
+        </ul>
+        <h2 class="title" itemprop="headline">{{ article.TitleEN }}</h2>
+        <div class="blog-details-thumb">
+            <!-- Ajout de l'image avec microdonnées -->
+            <img src="{{ asset(article.image) }}" alt="{{ article.TitleEN }}" itemprop="image">
+        </div>
+        <div class="blog-details-content" itemprop="articleBody">
+            {{ article.ContentEN|raw }}
+        </div>
+        <div class="blog-details-bottom">
+            <div class="row align-items-baseline">
+                <div class="col-xl-6 col-md-7">
+                    <div class="blog-details-tags">
+                        <ul class="list-wrap mb-0">
+                            {% for tag in article.tags %}
+                                <li>
+                                    <a href="{{ path('blog_index_tag_fr', { 'tag': tag.slugEn }) }}">
+                                        {{ tag.name_en }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-md-5">
+                    <!--
+                    <div class="blog-details-share">
+                        <h6 class="share-title">Share Now:</h6>
+                        <ul class="list-wrap mb-0">
+                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                            <li><a href="#"><i class="fab fa-behance"></i></a></li>
+                            <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                        </ul>
+                    </div>
+                    -->
+                </div>
+            </div>
+        </div>
+        <!--
+        <div class="blog-avatar-wrap">
+            <div class="blog-avatar-img">
+                <a href="#"><i class="far fa-check"></i><img src="assets/img/others/avatar.png" alt="img"></a>
+            </div>
+            <div class="blog-avatar-content">
+                <p>Monty Hython est un rédacteur chez Sarsa et couvre les technologies émergentes &amp;
+                    le capital-risque depuis 2013. Il couvre une grande variété de nouvelles, des startups en phase de démarrage et de croissance aux mastodontes technologiques.</p>
+                <h5 class="name">Alison Fiano</h5>
+                <span class="designation">Auteur OG</span>
+            </div>
+        </div>
+        -->
+        <div class="blog-prev-next-posts">
+            <div class="row">
+                <div class="col-xl-6 col-lg-8 col-md-6">
+                    <div class="pn-post-item">
+                        <!--
+                        <div class="thumb">
+                            <a href="blog-details.html"><img src="{{ asset('assets/img/lifestyle/life_style06.jpg') }}" alt="img"></a>
+                        </div>
+                        -->
+                        <div class="content">
+                            {% if article.PreviousPostId != null %}
+                                <span>Post Précédent</span>
+                                <h5 class="title tgcommon__hover">
+                                    <a href="{{ path('blog_article', { 'WebTitleEN': article.PreviousPostId }) }}">
+                                        {{ article.PreviousPostTitle|u.truncate(50) }} ...
+                                    </a>
+                                </h5>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-8 col-md-6">
+                    <div class="pn-post-item next-post">
+                        <!--
+                        <div class="thumb">
+                            <a href="blog-details.html"><img src="assets/img/lifestyle/life_style07.jpg" alt="img"></a>
+                        </div>
+                        -->
+                        <div class="content">
+                            {% if article.NextPostId != null %}
+                                <span>Post Suivant</span>
+                                <h5 class="title tgcommon__hover">
+                                    <a href="{{ path('blog_article', { 'WebTitleEN': article.NextPostId }) }}">
+                                        {{ article.NextPostTitle|u.truncate(50) }}...
+                                    </a>
+                                </h5>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    <!-- Fin de l'article avec microdonnées -->
+{% endblock %}

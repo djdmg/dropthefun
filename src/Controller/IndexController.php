@@ -9,10 +9,15 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class IndexController extends AbstractController
 {
-    #[Route('/', name: 'index_principal')]
-    public function index(): Response
+    #[Route('/', name: 'blog_index')]
+    public function index(BlogPostApiClient $apiClient): Response
     {
-        return $this->redirectToRoute('blog_index');
+        $allPosts=$apiClient->getOnlineBlogPosts(1,5);
+
+
+        return $this->render('index/index.html.twig', [
+            'articles' => $allPosts->getData(), 'pagination' => $allPosts->getPagination()
+        ]);
     }
 
     #[Route('/fr/articles/{page}', name: 'blog_indexfr2')]
@@ -38,7 +43,7 @@ class IndexController extends AbstractController
         ]);
     }
 
-    #[Route('/en/', name: 'blog_index')]
+    #[Route('/en/', name: 'index_principalgi')]
     public function blog_index(BlogPostApiClient $apiClient): Response
     {
         $allPosts=$apiClient->getOnlineBlogPosts(1,5);

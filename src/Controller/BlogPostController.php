@@ -15,7 +15,7 @@ class BlogPostController extends AbstractController
         $article=$apiClient->getPost($WebTitleEN);
 
 
-        return $this->render('index/detail.html.twig', [
+        return $this->render('blog_post/blogPost.twig', [
             'article' => $article,
         ]);
     }
@@ -25,7 +25,7 @@ class BlogPostController extends AbstractController
     {
         $article=$apiClient->getPostFR($WebTitleFR);
 
-        return $this->render('index/detailFR.html.twig', [
+        return $this->render('blog_post/blogPostFR.html.twig', [
             'article' => $article,
         ]);
     }
