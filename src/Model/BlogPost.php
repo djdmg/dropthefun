@@ -77,6 +77,8 @@ class BlogPost
     private array $Tags = [];
 
 
+    private ?BlogPostSEODetail $blogPostSEODetail = null;
+
 
     public function __construct()
     {
@@ -383,6 +385,18 @@ class BlogPost
     {
         $this->Tags = $Tags;
     }
+
+    public function getBlogPostSEODetail(): ?BlogPostSEODetail
+    {
+        return $this->blogPostSEODetail;
+    }
+
+    public function setBlogPostSEODetail(?BlogPostSEODetail $blogPostSEODetail): void
+    {
+        $this->blogPostSEODetail = $blogPostSEODetail;
+    }
+
+
 
 
 

@@ -4,11 +4,17 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>DropTheFun - Actualités EDM avec une touche de fun</title>
-    <meta name="description" content="DropTheFun - EDM News With Fun Touchc">
+    <title>{{ article.TitleEN }}</title>
+
+    <meta property="og:locale" content="fr_FR" />
+    <meta name="description" content="{{ article.blogPostSEODetail.metaDescriptionFR }}">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ article.TitleFR }}" />
+    <meta property="og:description" content="{{ article.blogPostSEODetail.metaDescriptionFR }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assetsFolder/img/favicon.png') }}">
+    <meta name="keywords" content="{{ article.blogPostSEODetail.keywordsFR|join(', ') }}" />
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->

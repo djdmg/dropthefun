@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'blog_post/blogPostBase.html.twig' %}
 
 {% block content %}
     <!-- Début de l'article avec microdonnées NewsArticle -->
@@ -26,7 +26,7 @@
         <h2 class="title" itemprop="headline">{{ article.TitleEN }}</h2>
         <div class="blog-details-thumb">
             <!-- Ajout de l'image avec microdonnée -->
-            <img src="{{ asset(article.image) }}" alt="{{ article.TitleEN }}" itemprop="image">
+            <img src="{{ asset(article.image) }}" alt="{{ article.blogPostSEODetail.altImageEN  }}" itemprop="image">
         </div>
         <div class="blog-details-content" itemprop="articleBody">
             {{ article.ContentEN|raw }}
