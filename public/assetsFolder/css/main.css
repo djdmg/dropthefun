@@ -71,10 +71,10 @@
 ===============================*/
 
 iframe {
-  width: auto;
-  height: auto; /* Laisse l'iframe ajuster sa hauteur en fonction de son contenu */
-  aspect-ratio: auto; /* Laisser l'aspect ratio de l'iframe être déterminé par ses dimensions intrinsèques */
-  border: none; /* Supprime la bordure */
+  width: 100%;
+  aspect-ratio: 16 / 9; /* Ratio de 16:9 pour les vidéos YouTube */
+  height: auto;
+  border: none; /* Supprimer la bordure */
 }
 
 /*=============================
