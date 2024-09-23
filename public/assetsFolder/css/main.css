@@ -4,7 +4,7 @@
    Author : ThemeGenix
    Support: themegenix@gmail.com
    Description: Sarsa - News & Magazine HTML Template
-   Version: 1.1
+   Version: 1.2
 
 ----------------------------------------------
 
@@ -72,9 +72,9 @@
 
 iframe {
     width: 100%;
-    aspect-ratio: 16 / 9; /* Définissez le ratio souhaité, par exemple 16:9 */
+    aspect-ratio: 16 / 9; /* Dï¿½finissez le ratio souhaitï¿½, par exemple 16:9 */
     border: none; /* Optionnel : enlever la bordure */
-    /* Ajoutez d'autres styles si nécessaire */
+    /* Ajoutez d'autres styles si nï¿½cessaire */
 }
 
 /*=============================
