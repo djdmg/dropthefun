@@ -9,7 +9,7 @@
 ----------------------------------------------
 
 /************ TABLE OF CONTENTS **************
-
+	00. My IFrame
     01. Theme Default CSS
     02. Header
     03. Mobile Menu
@@ -64,6 +64,17 @@
   --tg-fw-medium: 500;
   --tg-fw-regular: 400;
   --tg-fw-light: 300;
+}
+
+/*=============================
+    00. My IFrame
+===============================*/
+
+iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Définissez le ratio souhaité, par exemple 16:9 */
+    border: none; /* Optionnel : enlever la bordure */
+    /* Ajoutez d'autres styles si nécessaire */
 }
 
 /*=============================
