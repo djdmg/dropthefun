@@ -71,7 +71,7 @@
 ===============================*/
 
 iframe {
-  width: 100%;
+  width: auto;
   height: auto; /* Laisse l'iframe ajuster sa hauteur en fonction de son contenu */
   aspect-ratio: auto; /* Laisser l'aspect ratio de l'iframe être déterminé par ses dimensions intrinsèques */
   border: none; /* Supprime la bordure */
