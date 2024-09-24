@@ -13,7 +13,7 @@ class CategoryController extends AbstractController
     #[Route('en/category/{category}', name: 'blog_article_by_category')]
     public function articleByCategory(BlogPostApiClient $apiClient, CacheInterface $cache, string $category): Response
     {
-        $articles = $apiClient->getPostByCategory($category, 1, 5, $cache);
+        $articles = $apiClient->getPostByCategory($category, $cache, 1, 5);
         $articles2 = $articles->getData();
 
         return $this->render('index/index.html.twig', [
@@ -26,7 +26,7 @@ class CategoryController extends AbstractController
     #[Route('fr/category/{category}', name: 'blog_article_by_category_fr')]
     public function articleByCategoryFr(BlogPostApiClient $apiClient, CacheInterface $cache, string $category): Response
     {
-        $articles = $apiClient->getPostByCategoryFr($category, 1, 5, $cache);
+        $articles = $apiClient->getPostByCategoryFr($category, $cache, 1, 5);
         $articles2 = $articles->getData();
 
         return $this->render('index/indexFR.html.twig', [
@@ -39,7 +39,7 @@ class CategoryController extends AbstractController
     #[Route('en/category/{category}/{page}', name: 'blog_article_by_category2')]
     public function articleByCategory2(BlogPostApiClient $apiClient, CacheInterface $cache, string $category, int $page): Response
     {
-        $articles = $apiClient->getPostByCategory($category, $page, 5, $cache);
+        $articles = $apiClient->getPostByCategory($category, $cache, $page, 5);
         $articles2 = $articles->getData();
 
         return $this->render('index/index.html.twig', [
@@ -50,9 +50,9 @@ class CategoryController extends AbstractController
     }
 
     #[Route('fr/category/{category}/{page}', name: 'blog_article_by_categoryFr2')]
-    public function articleByCategorFr2(BlogPostApiClient $apiClient, CacheInterface $cache, string $category, int $page): Response
+    public function articleByCategoryFr2(BlogPostApiClient $apiClient, CacheInterface $cache, string $category, int $page): Response
     {
-        $articles = $apiClient->getPostByCategoryFr($category, $page, 5, $cache);
+        $articles = $apiClient->getPostByCategoryFr($category, $cache, $page, 5);
         $articles2 = $articles->getData();
 
         return $this->render('index/indexFR.html.twig', [

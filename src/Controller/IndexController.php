@@ -13,7 +13,7 @@ class IndexController extends AbstractController
     #[Route('/', name: 'blog_index')]
     public function index(BlogPostApiClient $apiClient, CacheInterface $cache): Response
     {
-        $allPosts = $apiClient->getOnlineBlogPosts(1, 5, $cache);
+        $allPosts = $apiClient->getOnlineBlogPosts($cache, 1, 5);
 
         return $this->render('index/index.html.twig', [
             'articles'   => $allPosts->getData(),
@@ -24,7 +24,7 @@ class IndexController extends AbstractController
     #[Route('/fr/articles/{page}', name: 'blog_indexfr2')]
     public function blog_index2(BlogPostApiClient $apiClient, CacheInterface $cache, int $page): Response
     {
-        $allPosts = $apiClient->getOnlineBlogPosts($page, 5, $cache);
+        $allPosts = $apiClient->getOnlineBlogPosts($cache, $page, 5);
 
         return $this->render('index/indexFR.html.twig', [
             'articles'   => $allPosts->getData(),
@@ -35,7 +35,7 @@ class IndexController extends AbstractController
     #[Route('/en/articles/{page}', name: 'blog_index2')]
     public function blog_index2fr(BlogPostApiClient $apiClient, CacheInterface $cache, int $page): Response
     {
-        $allPosts = $apiClient->getOnlineBlogPosts($page, 5, $cache);
+        $allPosts = $apiClient->getOnlineBlogPosts($cache, $page, 5);
 
         return $this->render('index/index.html.twig', [
             'articles'   => $allPosts->getData(),
@@ -46,7 +46,7 @@ class IndexController extends AbstractController
     #[Route('/en/', name: 'index_principalgi')]
     public function blog_index(BlogPostApiClient $apiClient, CacheInterface $cache): Response
     {
-        $allPosts = $apiClient->getOnlineBlogPosts(1, 5, $cache);
+        $allPosts = $apiClient->getOnlineBlogPosts($cache, 1, 5);
 
         return $this->render('index/index.html.twig', [
             'articles'   => $allPosts->getData(),
@@ -57,7 +57,7 @@ class IndexController extends AbstractController
     #[Route('/fr/', name: 'blog_index_fr')]
     public function indexfr(BlogPostApiClient $apiClient, CacheInterface $cache): Response
     {
-        $allPosts = $apiClient->getOnlineBlogPosts(1, 5, $cache);
+        $allPosts = $apiClient->getOnlineBlogPosts($cache, 1, 5);
 
         return $this->render('index/indexFR.html.twig', [
             'articles'   => $allPosts->getData(),

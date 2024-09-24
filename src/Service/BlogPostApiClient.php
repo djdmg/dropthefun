@@ -18,11 +18,11 @@ class BlogPostApiClient
     public function __construct(HttpClientInterface $client, private SerializerInterface $serializer)
     {
         $this->client = $client;
-        $this->apiBaseUrl = 'https://worklessdjmore.com/api'; // Remplacez par l'URL de votre API distante
-        $this->apiKey = 'VdqT43xqoKhcCk1GMdvJhQuBFsgJ85m5'; // Remplacez par la clé API de votre API
+        $this->apiBaseUrl = 'https://worklessdjmore.com/api'; // Replace with your API URL
+        $this->apiKey = 'VdqT43xqoKhcCk1GMdvJhQuBFsgJ85m5'; // Replace with your API key
     }
 
-    public function getOnlineBlogPosts(int $page = 1, int $limit = 10, CacheInterface $cache): BlogPostResponse
+    public function getOnlineBlogPosts(CacheInterface $cache, int $page = 1, int $limit = 10): BlogPostResponse
     {
         $cacheKey = sprintf('blog_posts_page_%d_limit_%d', $page, $limit);
         return $cache->get($cacheKey, function (ItemInterface $item) use ($page, $limit) {
@@ -46,7 +46,7 @@ class BlogPostApiClient
         });
     }
 
-    public function getOnlineBlogPostsByTag($tag, int $page = 1, int $limit = 10, CacheInterface $cache): BlogPostResponse
+    public function getOnlineBlogPostsByTag(string $tag, CacheInterface $cache, int $page = 1, int $limit = 10): BlogPostResponse
     {
         $cacheKey = sprintf('blog_posts_tag_%s_page_%d_limit_%d', urlencode($tag), $page, $limit);
         return $cache->get($cacheKey, function (ItemInterface $item) use ($tag, $page, $limit) {
@@ -70,7 +70,7 @@ class BlogPostApiClient
         });
     }
 
-    public function getOnlineBlogPostsByTagFr($tag, int $page = 1, int $limit = 10, CacheInterface $cache): BlogPostResponse
+    public function getOnlineBlogPostsByTagFr(string $tag, CacheInterface $cache, int $page = 1, int $limit = 10): BlogPostResponse
     {
         $cacheKey = sprintf('blog_posts_fr_tag_%s_page_%d_limit_%d', urlencode($tag), $page, $limit);
         return $cache->get($cacheKey, function (ItemInterface $item) use ($tag, $page, $limit) {
@@ -134,7 +134,7 @@ class BlogPostApiClient
         });
     }
 
-    public function getPostByCategory(string $category, int $page = 1, int $limit = 10, CacheInterface $cache): BlogPostResponse
+    public function getPostByCategory(string $category, CacheInterface $cache, int $page = 1, int $limit = 10): BlogPostResponse
     {
         $cacheKey = sprintf('blog_posts_category_%s_page_%d_limit_%d', urlencode($category), $page, $limit);
         return $cache->get($cacheKey, function (ItemInterface $item) use ($category, $page, $limit) {
@@ -158,7 +158,7 @@ class BlogPostApiClient
         });
     }
 
-    public function getPostByCategoryFr(string $category, int $page = 1, int $limit = 10, CacheInterface $cache): BlogPostResponse
+    public function getPostByCategoryFr(string $category, CacheInterface $cache, int $page = 1, int $limit = 10): BlogPostResponse
     {
         $cacheKey = sprintf('blog_posts_fr_category_%s_page_%d_limit_%d', urlencode($category), $page, $limit);
         return $cache->get($cacheKey, function (ItemInterface $item) use ($category, $page, $limit) {
