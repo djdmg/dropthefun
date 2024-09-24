@@ -16,9 +16,9 @@
 
                                          {% set route = app.request.attributes.get('_route') %}
                                          {% if route == 'blog_index' %}
-                                            <link rel="preload" as="image" href="{{articles[0].image}}">
+                                           <link rel="preload" as="image" href="{{asset(articles[0].image)}}">
                                          {% elseif route == 'blog_index2' %}
-                                           <link rel="preload" as="image" href="{{articles[0].image}}">
+                                           <link rel="preload" as="image" href="{{asset(articles[0].image)}}">
                                        
                                         {% endif %}
 
