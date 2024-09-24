@@ -17,6 +17,13 @@
     <meta name="keywords" content="{{ article.blogPostSEODetail.keywordsFR|join(', ') }}" />
     <!-- Place favicon.ico in the root directory -->
 
+
+     <!-- Optimasation chargement de la premiére image -->
+
+     <link rel="preload" as="image" href="article.image">   
+                                  
+                                            
+
     <!-- CSS here -->
     {% include 'css.twig' %}
 </head>
