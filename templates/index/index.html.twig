@@ -9,7 +9,7 @@
         <div class="latest__post-thumb tgImage__hover">
             <a href="{{ path("blog_article", { 'WebTitleEN': article.WebTitleEN }) }}">
                 {% if loop.first %}
-                    <img src="{{ article.image }}" alt="img" decoding="async">
+                    <img src="{{ article.image }}" alt="img" >
                 {% else %}
                     <img src="{{ article.image }}" alt="img" loading="lazy">
                 {% endif %}
