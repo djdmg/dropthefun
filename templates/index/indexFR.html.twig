@@ -5,7 +5,16 @@
             {% for article in articles %}
                 <div class="latest__post-item">
                     <div class="latest__post-thumb tgImage__hover">
-                        <a href="{{ path("blog_article_fr",{ 'WebTitleFR': article.WebTitleFR }) }}"><img src="{{ article.image }}" alt="img"></a>
+                        <a href="{{ path("blog_article_fr",{ 'WebTitleFR': article.WebTitleFR }) }}">
+                                  {% if loop.first %}
+                                        <img src="{{ article.image }}" alt="img" >
+                                    {% else %}
+                                        <img src="{{ article.image }}" alt="img" loading="lazy">
+                                    {% endif %}
+
+
+
+
                     </div>
                     <div class="latest__post-content">
                         <ul class="tgbanner__content-meta list-wrap">
