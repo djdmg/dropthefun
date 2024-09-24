@@ -15,13 +15,18 @@
   <!-- Optimasation chargement de la premiére image -->
 
                                         {% set route = app.request.attributes.get('_route') %}
-
-                                        {% if route == 'blog_index' %}
+                                         {% if route == 'blog_article' and article is defined %}
+                                            <link rel="preload" as="image" href="articles.image">
+                                        {% elseif route == 'blog_index' %}
                                            <link rel="preload" as="image" href="articles[0].image">
                                         {% elseif route == 'blog_index2' %}
                                            <link rel="preload" as="image" href="articles[0].image">
                                        
                                         {% endif %}
+
+
+
+ 
 
     <!-- CSS here -->
     {% include 'css.twig' %}
