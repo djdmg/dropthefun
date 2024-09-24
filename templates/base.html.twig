@@ -11,6 +11,18 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assetsFolder/img/favicon.png') }}">
     <!-- Place favicon.ico in the root directory -->
 
+
+  <!-- Optimasation chargement de la premiére image -->
+
+                                        {% set route = app.request.attributes.get('_route') %}
+
+                                        {% if route == 'blog_index' %}
+                                           <link rel="preload" as="image" href="articles[0].image">
+                                        {% elseif route == 'blog_index2' %}
+                                           <link rel="preload" as="image" href="articles[0].image">
+                                       
+                                        {% endif %}
+
     <!-- CSS here -->
     {% include 'css.twig' %}
 </head>
@@ -62,7 +74,7 @@
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
-                                        {% set route = app.request.attributes.get('_route') %}
+                                      
 
                                         {% if route == 'blog_article' %}
                                             <li><a class="dropdown-item" href="{{ path('blog_article_fr', { 'WebTitleFR': article.WebTitleFR }) }}">FR</a></li>
