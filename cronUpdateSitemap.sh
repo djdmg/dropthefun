@@ -1,1 +1,1 @@
-/usr/bin/php8.3  /var/www/clients/client1/web13/web/bin/console presta:sitemaps:dump
+/usr/bin/php8.3  /var/www/clients/client1/web15/web/bin/console presta:sitemaps:dump
