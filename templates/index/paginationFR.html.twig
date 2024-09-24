@@ -1,21 +1,4 @@
-{# Pagination Controls #}
-<div class="pagination__wrap">
-    {% if pagination.has_previous_page %}
-        <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'page': pagination.previous_page})) }}"></a>
-    {% endif %}
 
-    {% for page in 1..pagination.total_pages %}
-        {% if page == pagination.current_page %}
-
-        {% else %}
-            <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'page': page})) }}"></a>
-        {% endif %}
-    {% endfor %}
-
-    {% if pagination.has_next_page %}
-        <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'page': pagination.next_page})) }}"></a>
-    {% endif %}
-</div>
 {# Pagination Controls #}
 <div class="pagination__wrap">
     <ul class="list-wrap">
