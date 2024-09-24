@@ -1,0 +1,10 @@
+# config/packages/presta_sitemap.yaml
+
+presta_sitemap:
+  sitemap_file_prefix: 'sitemap'
+  dump_directory: '%kernel.project_dir%/public'
+  defaults:
+    changefreq: 'daily'
+    priority: 1.0
+  route_annotation_listener: false
+  timetolive: 3600

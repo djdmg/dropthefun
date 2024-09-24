@@ -1,0 +1,1 @@
+/usr/bin/php8.3  /var/www/clients/client1/web16/web/bin/console presta:sitemaps:dump
