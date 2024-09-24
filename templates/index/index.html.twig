@@ -1,9 +1,13 @@
+
 {% extends 'base.html.twig' %}
 
-             {% for article in articles %}
+{% block content %}
+    <div class="col-xl-8 col-lg-7">
+        <div class="blog-post-wrapper">
+            {% for article in articles %}
                 <div class="latest__post-item">
                     <div class="latest__post-thumb tgImage__hover">
-                        <a href="{{ path("blog_article",{ 'WebTitleFR': article.WebTitleEN }) }}"><img src="{{ article.image }}" alt="img"></a>
+                        <a href="{{ path("blog_article",{ 'WebTitleEN': article.WebTitleEN }) }}"><img src="{{ article.image }}" alt="img"></a>
                     </div>
                     <div class="latest__post-content">
                         <ul class="tgbanner__content-meta list-wrap">
@@ -12,16 +16,15 @@
                             <li>{{ article.createdAt|date("M d, Y") }}</li>
                         </ul>
                         <h3 class="title tgcommon__hover"><a href="{{ path("blog_article",{ 'WebTitleEN': article.WebTitleEN }) }}">{{ article.TitleEN }}</a></h3>
-                        <p>{{ article.ContentFR|striptags('<p>')|u.truncate(500)|raw}} ...</p>
+                        <p>{{ article.ContentEN|striptags('<p>')|u.truncate(500)|raw}} ...</p>
 
 
                         <div class="latest__post-read-more">
-                            <a href="{{ path("blog_article",{ 'WebTitleEN': article.WebTitleEN }) }}">Voir Plus<i class="far fa-long-arrow-right"></i></a>
+                            <a href="{{ path("blog_article",{ 'WebTitleEN': article.WebTitleEN }) }}">Read More <i class="far fa-long-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
             {% endfor %}
-
 
             {% include 'index/pagination.html.twig' %}
 
