@@ -6,7 +6,8 @@ use App\Model\BlogPost;
 use App\Model\BlogPostResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 
 class BlogPostApiClient
 {
@@ -14,228 +15,170 @@ class BlogPostApiClient
     private string $apiBaseUrl;
     private string $apiKey;
 
-    public function __construct(HttpClientInterface $client,private SerializerInterface $serializer)
+    public function __construct(HttpClientInterface $client, private SerializerInterface $serializer)
     {
         $this->client = $client;
-
         $this->apiBaseUrl = 'https://worklessdjmore.com/api'; // Remplacez par l'URL de votre API distante
         $this->apiKey = 'VdqT43xqoKhcCk1GMdvJhQuBFsgJ85m5'; // Remplacez par la clé API de votre API
     }
 
-    /**
-     * Récupère les articles de blog en ligne
-     *
-     * @return array|null
-     */
-    public function getOnlineBlogPosts(int $page = 1, int $limit = 10) :BlogPostResponse
+    public function getOnlineBlogPosts(int $page = 1, int $limit = 10, CacheInterface $cache): BlogPostResponse
     {
-        // Construire l'URL complète pour accéder à l'endpoint
-        $url = $this->apiBaseUrl . '/edm-news';
+        $cacheKey = sprintf('blog_posts_page_%d_limit_%d', $page, $limit);
+        return $cache->get($cacheKey, function (ItemInterface $item) use ($page, $limit) {
+            $item->expiresAfter(1800);
+            $url = $this->apiBaseUrl . '/edm-news';
+            $response = $this->client->request('GET', $url, [
+                'query' => [
+                    'page' => $page,
+                    'limit' => $limit,
+                ],
+                'headers' => [
+                    'x-api-key' => $this->apiKey,
+                ],
+            ]);
 
+            if ($response->getStatusCode() === 200) {
+                return $this->serializer->deserialize($response->getContent(), BlogPostResponse::class, 'json');
+            }
 
-        $response = $this->client->request('GET', $url, [
-            'query' => [
-                'page' => $page,
-                'limit' => $limit,
-            ],
-            'headers' => [
-                'x-api-key' => $this->apiKey,
-            ],
-        ]);
-
-
-
-
-
-
-        // Vérifier le statut HTTP de la réponse
-        if ($response->getStatusCode() === 200) {
-            // Récupérer et retourner le contenu de la réponse (décodé en tableau associatif)
-
-            return $this->serializer->deserialize($response->getContent(), BlogPostResponse::class, 'json');
-        }
-
-        // Gérer les erreurs (par exemple, renvoyer null si une erreur survient)
-        return new BlogPostResponse(null,null);
+            return new BlogPostResponse(null, null);
+        });
     }
 
-    /**
-     * Récupère les articles anglais correcpondant à un certain tag
-     *
-     * @return array|null
-     */
-    public function getOnlineBlogPostsByTag($tag, $page = 1, int $limit = 10) :BlogPostResponse
+    public function getOnlineBlogPostsByTag($tag, int $page = 1, int $limit = 10, CacheInterface $cache): BlogPostResponse
     {
-        // Construire l'URL complète pour accéder à l'endpoint
-        $url = $this->apiBaseUrl . '/tag/'.urlencode($tag);
+        $cacheKey = sprintf('blog_posts_tag_%s_page_%d_limit_%d', urlencode($tag), $page, $limit);
+        return $cache->get($cacheKey, function (ItemInterface $item) use ($tag, $page, $limit) {
+            $item->expiresAfter(1800);
+            $url = $this->apiBaseUrl . '/tag/' . urlencode($tag);
+            $response = $this->client->request('GET', $url, [
+                'query' => [
+                    'page' => $page,
+                    'limit' => $limit,
+                ],
+                'headers' => [
+                    'x-api-key' => $this->apiKey,
+                ],
+            ]);
 
+            if ($response->getStatusCode() === 200) {
+                return $this->serializer->deserialize($response->getContent(), BlogPostResponse::class, 'json');
+            }
 
-
-        // Effectuer la requête GET avec la clé API dans les headers
-        $response = $this->client->request('GET', $url, [
-            'query' => [
-                'page' => $page,
-                'limit' => $limit,
-            ],
-            'headers' => [
-                'x-api-key' => $this->apiKey,
-            ],
-        ]);
-
-
-
-        // Vérifier le statut HTTP de la réponse
-        if ($response->getStatusCode() === 200) {
-            // Récupérer et retourner le contenu de la réponse (décodé en tableau associatif)
-
-            return $this->serializer->deserialize($response->getContent(), BlogPostResponse::class, 'json');
-        }
-
-        // Gérer les erreurs (par exemple, renvoyer null si une erreur survient)
-        return new BlogPostResponse(null,null);
+            return new BlogPostResponse(null, null);
+        });
     }
 
-    public function getOnlineBlogPostsByTagFr($tag,int $page = 1, int $limit = 10) :BlogPostResponse
+    public function getOnlineBlogPostsByTagFr($tag, int $page = 1, int $limit = 10, CacheInterface $cache): BlogPostResponse
     {
-        // Construire l'URL complète pour accéder à l'endpoint
-        $url = $this->apiBaseUrl . '/tag/fr/'.urlencode($tag);
+        $cacheKey = sprintf('blog_posts_fr_tag_%s_page_%d_limit_%d', urlencode($tag), $page, $limit);
+        return $cache->get($cacheKey, function (ItemInterface $item) use ($tag, $page, $limit) {
+            $item->expiresAfter(1800);
+            $url = $this->apiBaseUrl . '/tag/fr/' . urlencode($tag);
+            $response = $this->client->request('GET', $url, [
+                'query' => [
+                    'page' => $page,
+                    'limit' => $limit,
+                ],
+                'headers' => [
+                    'x-api-key' => $this->apiKey,
+                ],
+            ]);
 
+            if ($response->getStatusCode() === 200) {
+                return $this->serializer->deserialize($response->getContent(), BlogPostResponse::class, 'json');
+            }
 
-
-        // Effectuer la requête GET avec la clé API dans les headers
-        $response = $this->client->request('GET', $url, [
-            'query' => [
-                'page' => $page,
-                'limit' => $limit,
-            ],
-            'headers' => [
-                'x-api-key' => $this->apiKey,
-            ],
-        ]);
-
-
-
-        // Vérifier le statut HTTP de la réponse
-        if ($response->getStatusCode() === 200) {
-            // Récupérer et retourner le contenu de la réponse (décodé en tableau associatif)
-
-            return $this->serializer->deserialize($response->getContent(), BlogPostResponse::class, 'json');
-        }
-
-        // Gérer les erreurs (par exemple, renvoyer null si une erreur survient)
-        return new BlogPostResponse(null,null);
+            return new BlogPostResponse(null, null);
+        });
     }
 
-    public function getPostFR(string $WebTitleFR) :BlogPost
+    public function getPost(string $WebTitleEN, CacheInterface $cache): BlogPost
     {
-        // Construire l'URL complète pour accéder à l'endpoint
-        $url = $this->apiBaseUrl . '/edm-news/fr/'.$WebTitleFR;
+        $cacheKey = 'blog_post_' . $WebTitleEN;
+        return $cache->get($cacheKey, function (ItemInterface $item) use ($WebTitleEN) {
+            $item->expiresAfter(1800);
+            $url = $this->apiBaseUrl . '/edm-news/' . $WebTitleEN;
+            $response = $this->client->request('GET', $url, [
+                'headers' => [
+                    'x-api-key' => $this->apiKey
+                ]
+            ]);
 
-        // Effectuer la requête GET avec la clé API dans les headers
-        $response = $this->client->request('GET', $url, [
-            'headers' => [
-                'x-api-key' => $this->apiKey
-            ]
-        ]);
+            if ($response->getStatusCode() === 200) {
+                return $this->serializer->deserialize($response->getContent(), BlogPost::class, 'json');
+            }
 
-
-
-        // Vérifier le statut HTTP de la réponse
-        if ($response->getStatusCode() === 200) {
-            // Récupérer et retourner le contenu de la réponse (décodé en tableau associatif)
-
-            $article=$this->serializer->deserialize($response->getContent(), BlogPost::class, 'json');
-            return $article;
-        }
-
-        // Gérer les erreurs (par exemple, renvoyer null si une erreur survient)
-        return new BlogPost();
+            return new BlogPost();
+        });
     }
 
-    public function getPost(string $WebTitleEN) :BlogPost
+    public function getPostFR(string $WebTitleFR, CacheInterface $cache): BlogPost
     {
-        // Construire l'URL complète pour accéder à l'endpoint
-        $url = $this->apiBaseUrl . '/edm-news/'.$WebTitleEN;
+        $cacheKey = 'blog_post_fr_' . $WebTitleFR;
+        return $cache->get($cacheKey, function (ItemInterface $item) use ($WebTitleFR) {
+            $item->expiresAfter(1800);
+            $url = $this->apiBaseUrl . '/edm-news/fr/' . $WebTitleFR;
+            $response = $this->client->request('GET', $url, [
+                'headers' => [
+                    'x-api-key' => $this->apiKey
+                ]
+            ]);
 
-        // Effectuer la requête GET avec la clé API dans les headers
-        $response = $this->client->request('GET', $url, [
-            'headers' => [
-                'x-api-key' => $this->apiKey
-            ]
-        ]);
+            if ($response->getStatusCode() === 200) {
+                return $this->serializer->deserialize($response->getContent(), BlogPost::class, 'json');
+            }
 
-
-
-        // Vérifier le statut HTTP de la réponse
-        if ($response->getStatusCode() === 200) {
-
-            // Récupérer et retourner le contenu de la réponse (décodé en tableau associatif)
-            $article=$this->serializer->deserialize($response->getContent(), BlogPost::class, 'json');
-            return $article;
-        }
-
-        // Gérer les erreurs (par exemple, renvoyer null si une erreur survient)
-        return new BlogPost();
+            return new BlogPost();
+        });
     }
 
-    public function getPostByCategory(string $category,int $page = 1, int $limit = 10) :BlogPostResponse
+    public function getPostByCategory(string $category, int $page = 1, int $limit = 10, CacheInterface $cache): BlogPostResponse
     {
-        // Construire l'URL complète pour accéder à l'endpoint
-        $url = $this->apiBaseUrl . '/category/'.urlencode($category);
+        $cacheKey = sprintf('blog_posts_category_%s_page_%d_limit_%d', urlencode($category), $page, $limit);
+        return $cache->get($cacheKey, function (ItemInterface $item) use ($category, $page, $limit) {
+            $item->expiresAfter(1800);
+            $url = $this->apiBaseUrl . '/category/' . urlencode($category);
+            $response = $this->client->request('GET', $url, [
+                'query' => [
+                    'page' => $page,
+                    'limit' => $limit,
+                ],
+                'headers' => [
+                    'x-api-key' => $this->apiKey,
+                ],
+            ]);
 
-        // Effectuer la requête GET avec la clé API dans les headers
-        $response = $this->client->request('GET', $url, [
-            'query' => [
-                'page' => $page,
-                'limit' => $limit,
-            ],
-            'headers' => [
-                'x-api-key' => $this->apiKey,
-            ],
-        ]);
+            if ($response->getStatusCode() === 200) {
+                return $this->serializer->deserialize($response->getContent(), BlogPostResponse::class, 'json');
+            }
 
-
-
-
-        // Vérifier le statut HTTP de la réponse
-        if ($response->getStatusCode() === 200) {
-
-            // Récupérer et retourner le contenu de la réponse (décodé en tableau associatif)
-            $article=$this->serializer->deserialize($response->getContent(), BlogPostResponse::class, 'json');
-            return $article;
-        }
-
-        // Gérer les erreurs (par exemple, renvoyer null si une erreur survient)
-        return new BlogPostResponse(null,null);
+            return new BlogPostResponse(null, null);
+        });
     }
 
-    public function getPostByCategoryFr(string $category,int $page = 1, int $limit = 10) :BlogPostResponse
+    public function getPostByCategoryFr(string $category, int $page = 1, int $limit = 10, CacheInterface $cache): BlogPostResponse
     {
-        // Construire l'URL complète pour accéder à l'endpoint
-        $url = $this->apiBaseUrl . '/fr/category/'.urlencode($category);
+        $cacheKey = sprintf('blog_posts_fr_category_%s_page_%d_limit_%d', urlencode($category), $page, $limit);
+        return $cache->get($cacheKey, function (ItemInterface $item) use ($category, $page, $limit) {
+            $item->expiresAfter(1800);
+            $url = $this->apiBaseUrl . '/fr/category/' . urlencode($category);
+            $response = $this->client->request('GET', $url, [
+                'query' => [
+                    'page' => $page,
+                    'limit' => $limit,
+                ],
+                'headers' => [
+                    'x-api-key' => $this->apiKey,
+                ],
+            ]);
 
-        // Effectuer la requête GET avec la clé API dans les headers
-        $response = $this->client->request('GET', $url, [
-            'query' => [
-                'page' => $page,
-                'limit' => $limit,
-            ],
-            'headers' => [
-                'x-api-key' => $this->apiKey,
-            ],
-        ]);
+            if ($response->getStatusCode() === 200) {
+                return $this->serializer->deserialize($response->getContent(), BlogPostResponse::class, 'json');
+            }
 
-
-
-        // Vérifier le statut HTTP de la réponse
-        if ($response->getStatusCode() === 200) {
-
-            // Récupérer et retourner le contenu de la réponse (décodé en tableau associatif)
-            $article=$this->serializer->deserialize($response->getContent(), BlogPostResponse::class, 'json');
-            return $article;
-        }
-
-        // Gérer les erreurs (par exemple, renvoyer null si une erreur survient)
-        return new BlogPostResponse(null,null);
+            return new BlogPostResponse(null, null);
+        });
     }
 }

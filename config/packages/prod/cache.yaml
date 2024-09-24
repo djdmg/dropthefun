@@ -1,0 +1,9 @@
+framework:
+    cache:
+        pools:
+            app:
+                adapters:
+                    - { name: cache.adapter.memcached, provider: 'memcached://127.0.0.1:11211' }
+                    - cache.adapter.filesystem
+
+
