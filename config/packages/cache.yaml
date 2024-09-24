@@ -1,8 +1,12 @@
 framework:
     cache:
         app:
-            adapter: cache.adapter.memcached
-            provider: 'memcached://127.0.0.1:11211'
+            adapter: cache.adapter.chain
+            adapters:
+                - adapter: cache.adapter.memcached
+                  provider: 'memcached://127.0.0.1:11211'
+                - adapter: cache.adapter.filesystem
+
 
 
 
