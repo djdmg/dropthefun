@@ -26,13 +26,13 @@
             {% elseif route == 'blog_indexfr2' %}
                 <li><a href="{{ path('blog_indexfr2', { 'page': pagination.previous_page }) }}"><i class="fas fa-angle-double-left"></i></a></li>
             {% elseif route == 'blog_article_by_category_fr' %}
-                <li><a href="{{ path('blog_article_by_categoryFr2', { 'page': pagination.previous_page, 'category':category.slugEn  }) }}"><i class="fas fa-angle-double-left"></i></a></li>
+                <li><a href="{{ path('blog_article_by_categoryFr2', { 'page': pagination.previous_page, 'category':category.slugFr  }) }}"><i class="fas fa-angle-double-left"></i></a></li>
             {% elseif route == 'blog_article_by_categoryFr2' %}
-                <li><a href="{{ path('blog_article_by_categoryFr2', { 'page': pagination.previous_page, 'category':category.slugEn  }) }}"><i class="fas fa-angle-double-left"></i></a></li>
+                <li><a href="{{ path('blog_article_by_categoryFr2', { 'page': pagination.previous_page, 'category':category.slugFr  }) }}"><i class="fas fa-angle-double-left"></i></a></li>
             {% elseif route == 'blog_index_tag_fr' %}
-                <li><a href="{{ path('blog_index_tag_fr2', { 'page': pagination.previous_page, 'category':category.slugEn  }) }}"><i class="fas fa-angle-double-left"></i></a></li>
+                <li><a href="{{ path('blog_index_tag_fr2', { 'page': pagination.previous_page, 'category':category.slugFr  }) }}"><i class="fas fa-angle-double-left"></i></a></li>
             {% elseif route == 'blog_index_tag_fr2' %}
-                <li><a href="{{ path('blog_index_tag_fr2', { 'page': pagination.previous_page, 'category':category.slugEn  }) }}"><i class="fas fa-angle-double-left"></i></a></li>
+                <li><a href="{{ path('blog_index_tag_fr2', { 'page': pagination.previous_page, 'category':category.slugFr  }) }}"><i class="fas fa-angle-double-left"></i></a></li>
             {% endif %}
         {% else %}
             <li class="disabled"><a href="#"><i class="fas fa-angle-double-left"></i></a></li>
@@ -48,13 +48,13 @@
                 {% elseif route == 'blog_indexfr2' %}
                     <li><a href="{{ path('blog_indexfr2', { 'page': page }) }}">{{ page|number_format(0) }}</a></li>
                 {% elseif route == 'blog_article_by_category_fr' %}
-                    <li><a href="{{ path('blog_article_by_categoryFr2', { 'page': page, 'category':category.slugEn }) }}">{{ page|number_format(0) }}</a></li>
+                    <li><a href="{{ path('blog_article_by_categoryFr2', { 'page': page, 'category':category.slugFr }) }}">{{ page|number_format(0) }}</a></li>
                 {% elseif route == 'blog_article_by_categoryFr2' %}
-                    <li><a href="{{ path('blog_article_by_categoryFr2', { 'page': page, 'category':category.slugEn  }) }}">{{ page|number_format(0) }}</a></li>
+                    <li><a href="{{ path('blog_article_by_categoryFr2', { 'page': page, 'category':category.slugFr  }) }}">{{ page|number_format(0) }}</a></li>
                 {% elseif route == 'blog_index_tag_fr' %}
-                    <li><a href="{{ path('blog_index_tag_fr2', { 'page': page, 'tag':tag.slugEn }) }}">{{ page|number_format(0) }}</a></li>
+                    <li><a href="{{ path('blog_index_tag_fr2', { 'page': page, 'tag':tag.slugFr }) }}">{{ page|number_format(0) }}</a></li>
                 {% elseif route == 'blog_index_tag_fr2' %}
-                    <li><a href="{{ path('blog_index_tag_fr2', { 'page': page, 'tag':tag.slugEn  }) }}">{{ page|number_format(0) }}</a></li>
+                    <li><a href="{{ path('blog_index_tag_fr2', { 'page': page, 'tag':tag.slugFr  }) }}">{{ page|number_format(0) }}</a></li>
                 {% endif %}
 
             {% elseif page == 3 or page == pagination.total_pages - 2 %}
@@ -69,13 +69,13 @@
             {% elseif route == 'blog_indexfr2' %}
                 <li><a href="{{ path('blog_indexfr2', { 'page': pagination.next_page }) }}"><i class="fas fa-angle-double-right"></i></a></li>
             {% elseif route == 'blog_article_by_category_fr' %}
-                <li><a href="{{ path('blog_article_by_categoryFr2', { 'page': pagination.next_page, 'category':category.slugEn }) }}"><i class="fas fa-angle-double-right"></i></a></li>
+                <li><a href="{{ path('blog_article_by_categoryFr2', { 'page': pagination.next_page, 'category':category.slugFr }) }}"><i class="fas fa-angle-double-right"></i></a></li>
             {% elseif route == 'blog_article_by_categoryFr2' %}
-                <li><a href="{{ path('blog_article_by_categoryFr2', { 'page': pagination.next_page, 'category':category.slugEn }) }}"><i class="fas fa-angle-double-right"></i></a></li>
+                <li><a href="{{ path('blog_article_by_categoryFr2', { 'page': pagination.next_page, 'category':category.slugFr }) }}"><i class="fas fa-angle-double-right"></i></a></li>
             {% elseif route == 'blog_index_tag_fr' %}
-                <li><a href="{{ path('blog_index_tag_fr2', { 'page': pagination.next_page, 'tag':category.slugEn }) }}"><i class="fas fa-angle-double-right"></i></a></li>
+                <li><a href="{{ path('blog_index_tag_fr2', { 'page': pagination.next_page, 'tag':category.slugFr }) }}"><i class="fas fa-angle-double-right"></i></a></li>
             {% elseif route == 'blog_index_tag_fr2' %}
-                <li><a href="{{ path('blog_index_tag_fr2', { 'page': pagination.next_page, 'tag':category.slugEn }) }}"><i class="fas fa-angle-double-right"></i></a></li>
+                <li><a href="{{ path('blog_index_tag_fr2', { 'page': pagination.next_page, 'tag':category.slugFr }) }}"><i class="fas fa-angle-double-right"></i></a></li>
             {% endif %}
         {% else %}
             <li class="disabled"><a href="#"><i class="fas fa-angle-double-right"></i></a></li>
