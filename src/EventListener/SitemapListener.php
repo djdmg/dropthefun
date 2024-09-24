@@ -9,6 +9,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Presta\SitemapBundle\Sitemap\Url\UrlConcrete;
 use App\Service\BlogPostApiClient;
+use Symfony\Component\Routing\RequestContext;
 use Symfony\Contracts\Cache\CacheInterface;
 
 class SitemapListener implements EventSubscriberInterface
@@ -16,12 +17,17 @@ class SitemapListener implements EventSubscriberInterface
     private UrlGeneratorInterface $router;
     private BlogPostApiClient $apiClient;
     private CacheInterface $cache;
+    private RequestContext $context;
 
     public function __construct(UrlGeneratorInterface $router, BlogPostApiClient $apiClient, CacheInterface $cache)
     {
         $this->router = $router;
         $this->apiClient = $apiClient;
         $this->cache = $cache;
+        $context= new RequestContext();
+        $context->setHost("dropthefun.com");
+        $context->setScheme("https");
+        $this->router->setContext($context);
     }
 
     public static function getSubscribedEvents()
