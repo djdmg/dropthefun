@@ -23,6 +23,10 @@ RUN apt-get update && apt-get install -y \
     opcache
 
 
+RUN apt install -y libmemcached-dev zlib1g-dev libssl-dev
+RUN yes '' | pecl install -f memcached-3.2.0 \
+  && docker-php-ext-enable memcached
+
 # Installer Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
