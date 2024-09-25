@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libfreetype6-dev \
     memcached \
+    php-memcached \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install \
     zip \
@@ -22,8 +23,7 @@ RUN apt-get update && apt-get install -y \
     gd \
     opcache
 
-# Installer l'extension Memcached via APT
-RUN apt-get install -y php-memcached
+
 
 # Vérifier que l'extension Memcached est bien installée
 RUN php -m | grep memcached
