@@ -3,7 +3,7 @@ framework:
         pools:
             app:
                 adapters:
-                    - { name: cache.adapter.memcached, provider: 'memcached://127.0.0.1:11211' }
+                    - { name: cache.adapter.memcached, provider: 'memcached://localhost:11211' }
                    
 
 
