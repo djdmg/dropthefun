@@ -1,9 +1,10 @@
+# config/packages/cache.yaml
 framework:
     cache:
         pools:
-            cache.app:
-                adapter: cache.adapter.memcached
-                provider: memcached://127.0.0.1:11211
+            app:
+                adapters:
+                  - {name: cache.adapter.memcached, provider: 'memcached://127.0.0.1:11211'}
 
                    
 
