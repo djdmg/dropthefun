@@ -1,9 +1,5 @@
-# config/packages/cache.yaml
+# config/packages/prod/cache.yaml
 framework:
     cache:
         app: cache.adapter.memcached
-        provider: memcached://127.0.0.1:11211
-
-                   
-
-
+        default_memcached_provider: memcached://127.0.0.1:11211
