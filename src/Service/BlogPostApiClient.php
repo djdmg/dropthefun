@@ -26,7 +26,7 @@ class BlogPostApiClient
     {
         $cacheKey = sprintf('blog_posts_page_%d_limit_%d', $page, $limit);
         return $cache->get($cacheKey, function (ItemInterface $item) use ($page, $limit) {
-            $item->expiresAfter(300);
+            $item->expiresAfter(120);
             $url = $this->apiBaseUrl . '/edm-news';
             $response = $this->client->request('GET', $url, [
                 'query' => [
