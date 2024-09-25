@@ -1,0 +1,30 @@
+name: Build and Push Docker Image to NAS
+
+on:
+  push:
+    branches:
+      - master  # Déclenchement à chaque `push` sur la branche `main`
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to NAS Docker Registry
+        run: echo "${{ secrets.NAS_PASSWORD }}" | docker login http://dimitrig.synology.me:15000 -u ${{ secrets.NAS_USERNAME }} --password-stdin
+
+      - name: Build and push Docker image to NAS
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: http://dimitrig.synology.me:1git add *5000/your-image-name:latest
+
+      - name: Post build info
+        run: echo "Docker build and push to NAS completed!"
