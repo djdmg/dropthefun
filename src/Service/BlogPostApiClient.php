@@ -26,7 +26,7 @@ class BlogPostApiClient
     {
         $cacheKey = sprintf('blog_posts_page_%d_limit_%d', $page, $limit);
         return $cache->get($cacheKey, function (ItemInterface $item) use ($page, $limit) {
-            $item->expiresAfter(1800);
+            $item->expiresAfter(300);
             $url = $this->apiBaseUrl . '/edm-news';
             $response = $this->client->request('GET', $url, [
                 'query' => [
@@ -74,7 +74,7 @@ class BlogPostApiClient
     {
         $cacheKey = sprintf('blog_posts_fr_tag_%s_page_%d_limit_%d', urlencode($tag), $page, $limit);
         return $cache->get($cacheKey, function (ItemInterface $item) use ($tag, $page, $limit) {
-            $item->expiresAfter(1800);
+            $item->expiresAfter(300);
             $url = $this->apiBaseUrl . '/tag/fr/' . urlencode($tag);
             $response = $this->client->request('GET', $url, [
                 'query' => [
@@ -98,7 +98,7 @@ class BlogPostApiClient
     {
         $cacheKey = 'blog_post_' . $WebTitleEN;
         return $cache->get($cacheKey, function (ItemInterface $item) use ($WebTitleEN) {
-            $item->expiresAfter(1800);
+            $item->expiresAfter(3600);
             $url = $this->apiBaseUrl . '/edm-news/' . $WebTitleEN;
             $response = $this->client->request('GET', $url, [
                 'headers' => [
@@ -118,7 +118,7 @@ class BlogPostApiClient
     {
         $cacheKey = 'blog_post_fr_' . $WebTitleFR;
         return $cache->get($cacheKey, function (ItemInterface $item) use ($WebTitleFR) {
-            $item->expiresAfter(1800);
+            $item->expiresAfter(3600);
             $url = $this->apiBaseUrl . '/edm-news/fr/' . $WebTitleFR;
             $response = $this->client->request('GET', $url, [
                 'headers' => [
@@ -138,7 +138,7 @@ class BlogPostApiClient
     {
         $cacheKey = sprintf('blog_posts_category_%s_page_%d_limit_%d', urlencode($category), $page, $limit);
         return $cache->get($cacheKey, function (ItemInterface $item) use ($category, $page, $limit) {
-            $item->expiresAfter(1800);
+            $item->expiresAfter(300);
             $url = $this->apiBaseUrl . '/category/' . urlencode($category);
             $response = $this->client->request('GET', $url, [
                 'query' => [
@@ -162,7 +162,7 @@ class BlogPostApiClient
     {
         $cacheKey = sprintf('blog_posts_fr_category_%s_page_%d_limit_%d', urlencode($category), $page, $limit);
         return $cache->get($cacheKey, function (ItemInterface $item) use ($category, $page, $limit) {
-            $item->expiresAfter(1800);
+            $item->expiresAfter(300);
             $url = $this->apiBaseUrl . '/fr/category/' . urlencode($category);
             $response = $this->client->request('GET', $url, [
                 'query' => [
