@@ -21,6 +21,14 @@ RUN apt-get update && apt-get install -y \
     gd \
     opcache
 
+# Installer l'extension Memcached via PECL
+RUN pecl install memcached \
+    && docker-php-ext-enable memcached
+
+# Vérifier la version de l'extension Memcached installée
+RUN php -r "echo 'Memcached version: ' . Memcached::MAJOR_VERSION . '.' . Memcached::MINOR_VERSION . '.' . Memcached::PATCH_VERSION . PHP_EOL;"
+
+
 # Installer Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
