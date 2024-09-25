@@ -1,3 +1,4 @@
+test
 User-agent: Googlebot
 Disallow: 
 User-agent: googlebot-image
