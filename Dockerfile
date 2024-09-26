@@ -35,6 +35,10 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/_temp_html
 COPY . /var/www/_temp_html
 
+# Copier la configuration Nginx personnalisée
+COPY nginx.conf /etc/nginx/nginx.conf
+
+
 # Installer les dépendances PHP dans le répertoire temporaire
 RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress
 
