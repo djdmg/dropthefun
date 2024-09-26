@@ -31,5 +31,5 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t dimitrig.synology.me:15000/my-image:latest .
-          docker push dimitrig.synology.me:15000/my-image:latest
+          docker build -t dimitrig.synology.me:15000/dropthefun:latest .
+          docker push dimitrig.synology.me:15000/dropthefun:latest
