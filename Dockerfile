@@ -50,4 +50,4 @@ RUN chown -R www-data:www-data /var/www/html/var
 EXPOSE 80 9000
 
 # Commande de démarrage pour lancer à la fois Nginx et PHP-FPM
-CMD service nginx start && php-fpm
+CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
