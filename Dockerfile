@@ -50,3 +50,7 @@ EXPOSE 80 9000
 
 # Utiliser le script d'entrée pour démarrer le conteneur
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+# Vérifié si les fichiers sont bien copié
+RUN ls -la /var/www/_temp_html
+
