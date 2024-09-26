@@ -31,23 +31,22 @@ RUN yes '' | pecl install -f memcached-3.2.0 \
 # Installer Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copier la configuration Nginx personnalisée
-COPY nginx.conf /etc/nginx/nginx.conf
+# Créer un répertoire temporaire pour copier le code source
+WORKDIR /var/www/_temp_html
+COPY . /var/www/_temp_html
 
-# Définir le répertoire de travail
-WORKDIR /var/www/html
-
-# Copier le code source de l'application Symfony
-COPY . /var/www/html
-
-# Installer les dépendances PHP
+# Installer les dépendances PHP dans le répertoire temporaire
 RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress
 
-# Définir les permissions sur le dossier var (si nécessaire)
-RUN chown -R www-data:www-data /var/www/html/var
+# Définir les permissions sur le dossier var
+RUN chown -R www-data:www-data /var/www/_temp_html/var
+
+# Copier le script d'entrée
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Exposer les ports pour Nginx (HTTP) et PHP-FPM (FastCGI)
 EXPOSE 80 9000
 
-# Commande de démarrage pour lancer à la fois Nginx et PHP-FPM
-CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
+# Utiliser le script d'entrée pour démarrer le conteneur
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
