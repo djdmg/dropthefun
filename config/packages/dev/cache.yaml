@@ -3,4 +3,4 @@ framework:
     pools:
       app:
         adapters:
-          - cache.adapter.filesystem
+          - cache.adapter.null
