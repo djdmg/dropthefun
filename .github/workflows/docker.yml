@@ -39,13 +39,9 @@ jobs:
 
       # 5. Construction et push de l'image Docker
       - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: true
-          tags: ${{ secrets.DOCKER_REGISTRY_URL }}/dropthefun:latest
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
+        run: |
+          docker build -t dimitrig.synology.me:15000/dropthefun:latest
+          docker push dimitrig.synology.me:15000/dropthefun:latest
 
       # 6. (Optionnel) Nettoyage du cache
       - name: Cleanup
