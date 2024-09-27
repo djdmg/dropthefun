@@ -32,8 +32,6 @@ jobs:
           password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: true
-          tags: ${{ secrets.DOCKER_REGISTRY_URL }}/dropthefun:latest
+        run: |
+          docker build -t dimitrig.synology.me:15000/dropthefun:latest
+          docker push dimitrig.synology.me:15000/dropthefun:latest
