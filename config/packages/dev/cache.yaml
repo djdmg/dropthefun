@@ -2,5 +2,4 @@ framework:
   cache:
     pools:
       app:
-        adapters:
-          - cache.adapter.null
+        adapter: cache.adapter.null
