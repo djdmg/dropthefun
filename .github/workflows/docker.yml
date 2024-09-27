@@ -37,7 +37,7 @@ jobs:
           username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
           password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
 
-      # 5. Construction et push de l'image Docker
+      # 5. Construction et push de l'image Docker dans le registre
       - name: Build and push Docker image
         run: |
           docker build -t dimitrig.synology.me:15000/dropthefun:latest .
